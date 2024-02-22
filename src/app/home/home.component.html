@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="heading">
+    <span class="title">Transaction of {{ month }}</span>
+</div>
+<div class="last-transactions">
+    @for (transaction of mockTransactions; track $index) {
+    <div class="wrapper">
+        <div class="transaction">
+            <div class="info-and-img">
+                <img
+                    [ngStyle]="{ 'background-color': transaction.type.color }"
+                    width="20"
+                    src="assets/icons/{{ transaction.type.icon }}.svg"
+                    alt="{{ transaction.type.icon }}"
+                />
+                <div class="what">
+                    <span class="description">{{
+                        transaction.description
+                    }}</span>
+                    <span class="type-name">{{ transaction.type.name }}</span>
+                </div>
+            </div>
+            <div class="amount">{{ transaction.amount }} {{ currency }}</div>
+        </div>
+    </div>
+    @if ($index != mockTransactions.length - 1) {
+    <div class="seperation"></div>
+    } }
+</div>
