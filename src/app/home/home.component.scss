@@ -8,10 +8,10 @@
         margin: 10px;
         border-radius: 8px;
         background-color: white;
-        box-shadow: rgba(227, 227, 227, 0.1) 0px 1px 3px 0px, rgba(217, 217, 217, 0.06) 0px 1px 2px 0px;
-    }
+        height: fit-content;
+        // box-shadow: rgba(227, 227, 227, 0.1) 0px 1px 3px 0px, rgba(217, 217, 217, 0.06) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-    .last-transactions-box {
         .heading {
             padding: 20px 20px 0 20px;
 
@@ -20,8 +20,13 @@
                 font-family: 'Sentient-Variable';
             }
         }
+    }
+
+    .last-transactions-box {
 
         .last-transactions {
+            max-height: 250px;
+            overflow-y: auto;
 
             .wrapper {
                 padding: 10px;
@@ -36,9 +41,14 @@
                 .info-and-img {
                     display: flex;
     
-                    img {
+                    .icon {
                         margin-right: 10px;
+                        width: 40px;
+                        height: 40px;
                         padding: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         border-radius: 50%;
                     }
     

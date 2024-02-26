@@ -1,18 +1,15 @@
 <div class="last-transactions-box box">
     <div class="heading">
-        <span class="title">Last transactions</span>
+        <span class="title">Transactions</span>
     </div>
     <div class="last-transactions">
         @for (transaction of mockTransactions; track $index) {
         <div class="wrapper">
             <div class="transaction">
                 <div class="info-and-img">
-                    <img
-                        [ngStyle]="{ 'background-color': transaction.type.color }"
-                        width="20"
-                        src="assets/icons/{{ transaction.type.icon }}.svg"
-                        alt="{{ transaction.type.icon }}"
-                    />
+                    <div class="icon" [ngStyle]="{ 'background-color': transaction.type.color}">
+                        {{ transaction.type.icon }}
+                    </div>
                     <div class="what">
                         <span class="description">{{
                             transaction.description
@@ -30,4 +27,10 @@
         <div class="seperation"></div>
         } }
     </div>
+</div>
+<div class="analytics-box box">
+    <div class="heading">
+        <span class="title">Spending analytics</span>
+    </div>
+    <div echarts [options]="optionChart"></div>
 </div>
