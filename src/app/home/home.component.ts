@@ -14,16 +14,19 @@ export class HomeComponent {
         {
             amount: -10,
             description: 'Nails',
+            date: new Date(),
             type: { color: '#3480eb', icon: 'home', name: 'Home expenses' },
         },
         {
             amount: -20.5,
             description: 'Blanket',
+            date: new Date(),
             type: { color: '#3480eb', icon: 'home', name: 'Home expenses' },
         },
         {
             amount: -102.2,
             description: 'Cups',
+            date: new Date(),
             type: { color: '#3480eb', icon: 'home', name: 'Home expenses' },
         },
     ];

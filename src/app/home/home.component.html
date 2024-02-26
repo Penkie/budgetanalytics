@@ -1,28 +1,33 @@
-<div class="heading">
-    <span class="title">Transaction of {{ month }}</span>
-</div>
-<div class="last-transactions">
-    @for (transaction of mockTransactions; track $index) {
-    <div class="wrapper">
-        <div class="transaction">
-            <div class="info-and-img">
-                <img
-                    [ngStyle]="{ 'background-color': transaction.type.color }"
-                    width="20"
-                    src="assets/icons/{{ transaction.type.icon }}.svg"
-                    alt="{{ transaction.type.icon }}"
-                />
-                <div class="what">
-                    <span class="description">{{
-                        transaction.description
-                    }}</span>
-                    <span class="type-name">{{ transaction.type.name }}</span>
+<div class="last-transactions-box box">
+    <div class="heading">
+        <span class="title">Last transactions</span>
+    </div>
+    <div class="last-transactions">
+        @for (transaction of mockTransactions; track $index) {
+        <div class="wrapper">
+            <div class="transaction">
+                <div class="info-and-img">
+                    <img
+                        [ngStyle]="{ 'background-color': transaction.type.color }"
+                        width="20"
+                        src="assets/icons/{{ transaction.type.icon }}.svg"
+                        alt="{{ transaction.type.icon }}"
+                    />
+                    <div class="what">
+                        <span class="description">{{
+                            transaction.description
+                        }}</span>
+                        <span class="type-name">{{ transaction.type.name }}</span>
+                    </div>
+                </div>
+                <div class="amount-and-date">
+                    <div class="amount">{{ transaction.amount }} {{ currency }}</div>
+                    <div class="date">{{ transaction.date | date }}</div>
                 </div>
             </div>
-            <div class="amount">{{ transaction.amount }} {{ currency }}</div>
         </div>
+        @if ($index != mockTransactions.length - 1) {
+        <div class="seperation"></div>
+        } }
     </div>
-    @if ($index != mockTransactions.length - 1) {
-    <div class="seperation"></div>
-    } }
 </div>

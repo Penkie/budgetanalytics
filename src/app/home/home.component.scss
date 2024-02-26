@@ -1,65 +1,91 @@
 :host {
-    .heading {
-        margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow: auto;
+    gap: 10px;
 
-        .title {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
+    .box {
+        margin: 10px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: rgba(227, 227, 227, 0.1) 0px 1px 3px 0px, rgba(217, 217, 217, 0.06) 0px 1px 2px 0px;
     }
 
-    .last-transactions {
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-            rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    .last-transactions-box {
+        .heading {
+            padding: 20px 20px 0 20px;
 
-        .wrapper {
-            padding: 10px;
+            .title {
+                font-size: 1.2rem;
+                font-family: 'Sentient-Variable';
+            }
         }
 
-        .transaction {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            justify-content: space-between;
+        .last-transactions {
 
-            .info-and-img {
+            .wrapper {
+                padding: 10px;
+            }
+    
+            .transaction {
                 display: flex;
-
-                img {
-                    margin-right: 10px;
-                    padding: 10px;
-                    border-radius: 50%;
+                align-items: center;
+                padding: 10px;
+                justify-content: space-between;
+    
+                .info-and-img {
+                    display: flex;
+    
+                    img {
+                        margin-right: 10px;
+                        padding: 10px;
+                        border-radius: 50%;
+                    }
+    
+                    .what {
+                        display: flex;
+                        flex-direction: column;
+    
+                        .type-name {
+                            font-size: 12px;
+                            color: grey;
+                        }
+    
+                        span {
+                            display: block;
+                        }
+                    }
                 }
-
-                .what {
+    
+                .amount-and-date {
                     display: flex;
                     flex-direction: column;
-
-                    .type-name {
-                        font-size: 12px;
-                        color: grey;
-                    }
-
-                    span {
-                        display: block;
-                    }
+                    justify-content: center;
+                }
+    
+                .amount {
+                    background-color: #ff00001f;
+                    padding: 1px 6px;
+                    border-radius: 8px;
+                    color: red;
+                    width: fit-content;
+                    align-self: flex-end;
+                }
+    
+                .date {
+                    align-self: flex-end;
+                    font-size: 12px;
+                    color: grey;
+                    margin-top: 2px;
                 }
             }
-
-            .amount {
-                background-color: #ff00001f;
-                padding: 1px 6px;
-                border-radius: 8px;
-                color: red;
+    
+            .seperation {
+                height: 1px;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.08);
+                // margin: 10px 0;
             }
-        }
-
-        .seperation {
-            height: 1px;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.08);
-            // margin: 10px 0;
         }
     }
 }
