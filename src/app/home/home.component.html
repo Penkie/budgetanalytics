@@ -1,36 +1,72 @@
-<div class="last-transactions-box box">
-    <div class="heading">
-        <span class="title">Transactions</span>
-    </div>
-    <div class="last-transactions">
-        @for (transaction of mockTransactions; track $index) {
-        <div class="wrapper">
-            <div class="transaction">
-                <div class="info-and-img">
-                    <div class="icon" [ngStyle]="{ 'background-color': transaction.type.color}">
-                        {{ transaction.type.icon }}
+<div class="filter">{{ month }} 2024</div>
+<div class="grid">
+    <div class="last-transactions-box box">
+        <div class="heading">
+            <span class="title">Transactions</span>
+        </div>
+        <div class="last-transactions">
+            @for (transaction of mockTransactions; track $index) {
+            <div class="wrapper">
+                <div class="transaction">
+                    <div class="info-and-img">
+                        <div
+                            class="icon"
+                            [ngStyle]="{
+                                'background-color': transaction.type.color
+                            }"
+                        >
+                            {{ transaction.type.icon }}
+                        </div>
+                        <div class="what">
+                            <span class="description">{{
+                                transaction.description
+                            }}</span>
+                            <span class="type-name">{{
+                                transaction.type.name
+                            }}</span>
+                        </div>
                     </div>
-                    <div class="what">
-                        <span class="description">{{
-                            transaction.description
-                        }}</span>
-                        <span class="type-name">{{ transaction.type.name }}</span>
+                    <div class="amount-and-date">
+                        <div
+                            [ngClass]="{
+                                red: transaction.amount < 0,
+                                green: transaction.amount > 0
+                            }"
+                            class="amount"
+                        >
+                            {{ transaction.amount }} {{ currency }}
+                        </div>
+                        <div class="date">{{ transaction.date | date }}</div>
                     </div>
-                </div>
-                <div class="amount-and-date">
-                    <div class="amount">{{ transaction.amount }} {{ currency }}</div>
-                    <div class="date">{{ transaction.date | date }}</div>
                 </div>
             </div>
+            @if ($index != mockTransactions.length - 1) {
+            <div class="seperation"></div>
+            } }
         </div>
-        @if ($index != mockTransactions.length - 1) {
-        <div class="seperation"></div>
-        } }
     </div>
-</div>
-<div class="analytics-box box">
-    <div class="heading">
-        <span class="title">Spending analytics</span>
+    <div class="analytics-box box">
+        <div class="heading">
+            <span class="title">Spending analytics</span>
+        </div>
+        <div echarts [options]="optionPieChart"></div>
     </div>
-    <div echarts [options]="optionChart"></div>
+    <div class="total-spent box">
+        <div class="heading">
+            <span class="title">Summary</span>
+        </div>
+        <div class="container">
+            <div class="title">
+                You spent <span class="red">{{ totalSpent }} CHF</span> and received
+                <span class="green">{{ totalRevenue }} CHF</span>, making it a total of
+                <span [ngClass]="totalRevenue + totalSpent < 0 ? 'red' : 'green'">{{ round(totalRevenue + totalSpent) }} CHF</span>
+            </div>
+        </div>
+        <div echarts [options]="optionBarChart"></div>
+    </div>
+    <div class="categories box">
+        <div class="heading">
+            <span class="title">Manage categories</span>
+        </div>
+    </div>
 </div>
