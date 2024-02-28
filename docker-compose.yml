@@ -1,9 +1,9 @@
 version: "3.7"
 
 services:
-  pocketbase:
+  pb-analytics:
     build: ./pocketbase/.
-    container_name: pocketbase
+    container_name: pb-analytics
     restart: unless-stopped
     ports:
       - "8044:8044"
