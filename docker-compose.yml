@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  pocketbase:
+    build: ./pocketbase/.
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - "8044:8044"
+    volumes:
+      - /data:/pb_data
