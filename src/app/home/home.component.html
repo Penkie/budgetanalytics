@@ -1,4 +1,21 @@
-<div class="filter">{{ month }} 2024</div>
+<div class="top-bar">
+    <div class="filter">
+        {{ month }} 2024
+    </div>
+    <div class="profile">
+        <button class="profile-btn">
+            <img width="50px" height="50px" src="assets/default_pp.png" alt="pp">
+        </button>
+        <!-- @if (toggleProfileMenu) { -->
+            <div class="menu" role="menu">
+                <ul>
+                    <li>Settings</li>
+                    <li (click)="logout()">Log out</li>
+                </ul>
+            </div>
+        <!-- } -->
+    </div>
+</div>
 <div class="grid">
     <div class="last-transactions-box box">
         <div class="heading">

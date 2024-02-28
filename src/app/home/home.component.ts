@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import type { EChartsOption } from 'echarts';
 import { PocketbaseService } from '../common/services/pocketbase.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -26,11 +27,14 @@ export class HomeComponent implements OnInit {
     public totalSpent = 0;
     public totalRevenue = 0;
 
+    // public toggleProfileMenu = false;
+
     constructor(
-        private pbService: PocketbaseService
+        private pbService: PocketbaseService,
+        private router: Router
     ) {}
 
-    public ngOnInit(): void {
+    public ngOnInit(): void {    
         this.pbService.getTransactions()
             .subscribe((res) => {
                 this.transactions = res.items;
@@ -128,5 +132,10 @@ export class HomeComponent implements OnInit {
 
     public round(value: number): number {
         return Math.round(value * 100) / 100;
+    }
+
+    public logout(): void {
+        this.pbService.logoutUser();
+        this.router.navigate(['/auth']);
     }
 }
