@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import PocketBase from 'pocketbase';
+import PocketBase, { ListResult, RecordModel } from 'pocketbase';
+import { Transaction } from '../models/transaction.model';
+import { Observable, from, map, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -23,5 +25,16 @@ export class PocketbaseService {
       }
 
       return this.pb.authStore.isValid;
+    }
+
+    // Transactions
+    public getTransactions(): Observable<ListResult<Transaction>> {
+      return from(this.pb.collection('transactions').getList<Transaction>(undefined, undefined, { expand: 'category'}))
+        .pipe(
+          tap(list => {
+            list.items.map((item) => item.category = item.expand!['category'])
+            return list;
+          })
+        );
     }
 }
