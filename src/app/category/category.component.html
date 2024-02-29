@@ -1,0 +1,53 @@
+<div class="heading">
+    <span class="title">Create a new category</span>
+</div>
+<div class="manage-box">
+    <div class="preview">
+        <div
+            [ngStyle]="{
+                'background-color': selectedColor,
+                color: pickTextColorBasedOnBgColor(selectedColor)
+            }"
+            class="category"
+        >
+            <div class="icon">{{ selectedIcon }}</div>
+            <div class="name">{{ nameModel ? nameModel : '\<new category>' }}</div>
+        </div>
+    </div>
+    <form class="category-form">
+        <div class="name">
+            <label for="name">Name</label>
+            <input [(ngModel)]="nameModel" type="text" name="name" id="name" />
+        </div>
+        <div class="colors-container">
+            <label>Color</label>
+            <div class="colors">
+                @for (color of availableColors; track $index) {
+                <div
+                    (click)="this.selectedColor = color"
+                    [ngClass]="color === selectedColor ? 'selected-color' : ''"
+                    [ngStyle]="{ 'background-color': color }"
+                    class="color"
+                ></div>
+                }
+            </div>
+        </div>
+        <div class="icons-container">
+            <label>Icon</label>
+            <div class="icons">
+                @for (icon of availableIcons; track $index) {
+                <div
+                    (click)="this.selectedIcon = icon"
+                    [ngClass]="icon === selectedIcon ? 'selected-icon' : ''"
+                    class="icon"
+                >
+                    {{ icon }}
+                </div>
+                }
+            </div>
+        </div>
+        <button class="submit">
+            Save
+        </button>
+    </form>
+</div>
