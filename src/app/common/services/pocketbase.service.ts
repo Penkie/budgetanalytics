@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import PocketBase, { AuthModel, ListResult, RecordModel } from 'pocketbase';
 import { Transaction } from '../models/transaction.model';
 import { Observable, from, map, tap } from 'rxjs';
+import { Category } from '../models/category';
 
 @Injectable({
     providedIn: 'root',
@@ -39,13 +40,22 @@ export class PocketbaseService {
 
     // Transactions
 
-    public getTransactions(): Observable<ListResult<Transaction>> {
+    public getTransactions(): Observable<Array<Transaction>> {
       return from(this.pb.collection('transactions').getList<Transaction>(undefined, undefined, { expand: 'category'}))
         .pipe(
-          tap(list => {
-            list.items.map((item) => item.category = item.expand!['category'])
-            return list;
+          map(list => list.items),
+          tap(items => {
+            // TODO: remove !
+            items.map((item) => item.category = item.expand!['category'])
+            return items;
           })
+        );
+    }
+
+    public getCategories(): Observable<Array<Category>> {
+      return from(this.pb.collection('categories').getList<Category>())
+        .pipe(
+          map((list) => list.items)
         );
     }
 }

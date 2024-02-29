@@ -4,6 +4,7 @@ export interface Category {
     color: string;
 
     // pb specific
+    id: string;
     collectionId?: string;
     collectionName?: string;
     expand?: {

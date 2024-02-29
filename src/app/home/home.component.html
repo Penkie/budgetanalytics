@@ -8,8 +8,19 @@
         </button>
         <div class="menu" role="menu">
             <ul>
-                <li>Settings</li>
-                <li (mousedown)="logout()">Log out</li>
+                <li class="button list-item">
+                    <img width="20px" height="20px" src="assets/icons/cog.svg" alt="cog">
+                    Settings
+                </li>
+                <li class="list-item">
+                    <img width="20px" height="20px" src="assets/icons/moon.svg" alt="moon">
+                    Dark mode
+                </li>
+                <li class="seperation"></li>
+                <li class="button list-item" (mousedown)="logout()">
+                    <img width="20px" height="20px" src="assets/icons/out.svg" alt="out">
+                    Log out
+                </li>
             </ul>
         </div>
     </div>
@@ -79,9 +90,18 @@
         </div>
         <div echarts [options]="optionBarChart"></div>
     </div>
-    <!-- <div class="categories-box box">
+    <div class="categories-box box">
         <div class="heading">
             <span class="title">Categories</span>
         </div>
-    </div> -->
+        <div class="categories">
+            @for (category of categories | async; track $index) {
+                <div [ngStyle]="{'background-color': category.color, 'color': pickTextColorBasedOnBgColor(category.color)}" class="category">
+                    <div class="icon">{{ category.icon }}</div>
+                    <div class="name">{{ category.name }}</div>
+                    <!-- <div class="total-spent">100 CHF</div> -->
+                </div>
+            }
+        </div>
+    </div>
 </div>

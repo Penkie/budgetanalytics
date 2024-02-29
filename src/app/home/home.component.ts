@@ -5,6 +5,8 @@ import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import type { EChartsOption } from 'echarts';
 import { PocketbaseService } from '../common/services/pocketbase.service';
 import { Router } from '@angular/router';
+import { Category } from '../common/models/category';
+import { Observable, map, switchMap, tap } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -16,82 +18,78 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     public transactions: Transaction[] = [];
+    public categories: Observable<Category[]>;
 
     public month = new Date().toLocaleDateString('default', { month: 'long' });
-    
-    public optionPieChart!: EChartsOption;
-    public optionBarChart!: EChartsOption;
+
+    public optionPieChart: EChartsOption;
+    public optionBarChart: EChartsOption;
 
     public currency: string = 'CHF';
 
     public totalSpent = 0;
     public totalRevenue = 0;
 
-    // public toggleProfileMenu = false;
+    constructor(private pbService: PocketbaseService, private router: Router) {}
 
-    constructor(
-        private pbService: PocketbaseService,
-        private router: Router
-    ) {}
+    public ngOnInit(): void {
+        this.categories = this.pbService.getCategories();
 
-    public ngOnInit(): void {    
-        this.pbService.getTransactions()
-            .subscribe((res) => {
-                this.transactions = res.items;
+        this.pbService.getTransactions().subscribe((res) => {
+            this.transactions = res;
 
-                const chartData = this.constructPieChartData();
-                this.calculateTotals();
+            const chartData = this.constructPieChartData();
+            this.calculateTotals();
 
-                this.optionPieChart = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: `{c} ${this.currency} ({d}%)`,
+            this.optionPieChart = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: `{c} ${this.currency} ({d}%)`,
+                },
+                series: [
+                    {
+                        name: 'Analytics',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        padAngle: 5,
+                        itemStyle: {
+                            borderRadius: 8,
+                        },
+                        data: chartData,
                     },
-                    series: [
-                        {
-                            name: 'Analytics',
-                            type: 'pie',
-                            radius: ['40%', '70%'],
-                            avoidLabelOverlap: false,
-                            padAngle: 5,
-                            itemStyle: {
-                                borderRadius: 8,
+                ],
+            };
+
+            this.optionBarChart = {
+                xAxis: {
+                    type: 'category',
+                    data: ['Revenue', 'Spending'],
+                },
+                yAxis: {
+                    type: 'value',
+                },
+                series: [
+                    {
+                        data: [
+                            {
+                                value: this.totalRevenue,
+                                itemStyle: {
+                                    color: '#24b330',
+                                },
                             },
-                            data: chartData,
-                        },
-                    ],
-                };
-        
-                this.optionBarChart = {
-                    xAxis: {
-                        type: 'category',
-                        data: ['Revenue', 'Spending'],
-                    },
-                    yAxis: {
-                        type: 'value',
-                    },
-                    series: [
-                        {
-                            data: [
-                                {
-                                    value: this.totalRevenue,
-                                    itemStyle: {
-                                        color: '#24b330',
-                                    },
+                            {
+                                value: this.totalSpent,
+                                itemStyle: {
+                                    color: '#eb4934',
                                 },
-                                {
-                                    value: this.totalSpent,
-                                    itemStyle: {
-                                        color: '#eb4934',
-                                    },
-                                },
-                            ],
-                            type: 'bar',
-                        },
-                    ],
-                };
-            });
-
+                            },
+                        ],
+                        type: 'bar',
+                    },
+                ],
+            };
+        });
     }
 
     public constructPieChartData(): Array<{ value: number; name: string }> {
@@ -127,7 +125,7 @@ export class HomeComponent implements OnInit {
             } else {
                 this.totalRevenue += transaction.amount;
             }
-        })
+        });
     }
 
     public round(value: number): number {
@@ -138,4 +136,13 @@ export class HomeComponent implements OnInit {
         this.pbService.logoutUser();
         this.router.navigate(['/auth']);
     }
+
+    public pickTextColorBasedOnBgColor(bgColor: string, lightColor = '#FFF', darkColor = '#000') {
+        var color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor;
+        var r = parseInt(color.substring(0, 2), 16); // hexToR
+        var g = parseInt(color.substring(2, 4), 16); // hexToG
+        var b = parseInt(color.substring(4, 6), 16); // hexToB
+        return (((r * 0.299) + (g * 0.587) + (b * 0.114)) > 186) ?
+          darkColor : lightColor;
+      }
 }
