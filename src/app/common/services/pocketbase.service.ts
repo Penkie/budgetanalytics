@@ -40,12 +40,17 @@ export class PocketbaseService {
 
     // Transactions
 
-    public getTransactions(): Observable<Array<Transaction>> {
+    public getTransactions(
+        fromDate: string,
+        toDate: string
+    ): Observable<Array<Transaction>> {
         return from(
             this.pb
                 .collection('transactions')
                 .getList<Transaction>(undefined, undefined, {
                     expand: 'category',
+                    sort: '-date',
+                    filter: `date >= "${fromDate}" && date <= "${toDate}"`,
                 })
         ).pipe(
             map((list) => list.items),

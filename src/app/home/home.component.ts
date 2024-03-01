@@ -6,9 +6,10 @@ import type { EChartsOption } from 'echarts';
 import { PocketbaseService } from '../common/services/pocketbase.service';
 import { Router, RouterModule } from '@angular/router';
 import { Category } from '../common/models/category';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CategoryItemComponent } from '../common/components/category-item.component';
 import { IconButtonComponent } from '../common/components/icon-button.component';
+import { endOfMonth, format, startOfMonth } from 'date-fns';
 
 @Component({
     selector: 'app-home',
@@ -43,7 +44,17 @@ export class HomeComponent implements OnInit {
     public ngOnInit(): void {
         this.categories = this.pbService.getCategories();
 
-        this.pbService.getTransactions().subscribe((res) => {
+        const currentDate = new Date();
+        const firstDay = format(
+            startOfMonth(currentDate),
+            "yyyy-MM-dd HH:mm:ss.SSS'Z'"
+        );
+        const lastDay = format(
+            endOfMonth(currentDate),
+            "yyyy-MM-dd HH:mm:ss.SSS'Z'"
+        );
+
+        this.pbService.getTransactions(firstDay, lastDay).subscribe((res) => {
             this.transactions = res;
 
             const chartData = this.constructPieChartData();
