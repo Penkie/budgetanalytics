@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PocketbaseService } from '../common/services/pocketbase.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertComponent } from '../common/components/alert.component';
+import { Category } from '../common/models/category';
 
 @Component({
     selector: 'app-category',
@@ -12,7 +13,7 @@ import { AlertComponent } from '../common/components/alert.component';
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
 })
-export class CategoryComponent {
+export class CategoryComponent implements OnInit {
     public nameModel = '';
 
     public availableColors = [
@@ -30,11 +31,54 @@ export class CategoryComponent {
     public selectedIcon = '🏠';
 
     public sendError = false;
+    public editionMode = false;
+    public currentCategory: Category;
 
     constructor(
-      private pocketbaseService: PocketbaseService,
-      private router: Router
+        private pocketbaseService: PocketbaseService,
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
+
+    public ngOnInit(): void {
+        const categoryId = this.route.snapshot.paramMap.get('id');
+        if (categoryId) {
+            // edit mode
+            this.editionMode = true;
+
+            // find category to edit
+            this.pocketbaseService.getCategoryById(categoryId).subscribe({
+                next: (category) => {
+                    this.currentCategory = category;
+                    this.nameModel = category.name;
+                    this.selectedIcon = category.icon;
+                    this.selectedColor = category.color;
+                },
+                error: () => {
+                    this.router.navigate(['']);
+                },
+            });
+        }
+    }
+
+    public editCategory(): void {
+        if (this.nameModel === '') {
+            return;
+        }
+
+        this.pocketbaseService.editCategory(this.currentCategory.id, this.nameModel, this.selectedColor, this.selectedIcon)
+          .subscribe({
+            next: (res) => {
+              if (res.id) {
+                // successfull, return to home page
+                this.router.navigate(['']);
+              }
+            },
+            error: () => {
+              this.sendError = true;
+            }
+          })
+    }
 
     public createCategory(): void {
         if (this.nameModel === '') {
@@ -48,15 +92,15 @@ export class CategoryComponent {
                 this.selectedIcon
             )
             .subscribe({
-              next: (res) => {
-                if (res.id) {
-                  // successfull, return to home page
-                  this.router.navigate(['']);
-                }
-              },
-              error: () => {
-                this.sendError = true;
-              }
+                next: (res) => {
+                    if (res.id) {
+                        // successfull, return to home page
+                        this.router.navigate(['']);
+                    }
+                },
+                error: () => {
+                    this.sendError = true;
+                },
             });
     }
 

@@ -1,5 +1,5 @@
 <div class="heading">
-    <span class="title">Create a new category</span>
+    <span class="title">{{ editionMode ? 'Edit a category' : 'Create a new category' }}</span>
 </div>
 <div class="manage-box">
     <div class="preview">
@@ -14,7 +14,7 @@
             <div class="name">{{ nameModel ? nameModel : '\<new category>' }}</div>
         </div>
     </div>
-    <form (submit)="createCategory()" class="category-form">
+    <form (submit)="editionMode ? editCategory() : createCategory()" class="category-form">
         <div class="name">
             <label for="name">Name</label>
             <input autofocus [(ngModel)]="nameModel" type="text" name="name" id="name" />

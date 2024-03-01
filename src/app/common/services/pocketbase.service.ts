@@ -61,11 +61,24 @@ export class PocketbaseService {
         );
     }
 
+    public getCategoryById(id: string): Observable<Category> {
+      return from(this.pb.collection('categories').getOne<Category>(id));
+    }
+
     public createCategory(name: string, color: string, icon: string): Observable<Category> {
       // get user
       const user = this.getUser();
       if (user) {
         return from(this.pb.collection('categories').create<Category>({ name, color, icon, user: user['id'] }));
+      }
+
+      return of();
+    }
+
+    public editCategory(id: string, name: string, color: string, icon: string): Observable<Category> {
+      const user = this.getUser();
+      if (user) {
+        return from(this.pb.collection('categories').update<Category>(id, { name, color, icon, user: user['id'] }));
       }
 
       return of();

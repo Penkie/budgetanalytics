@@ -96,7 +96,7 @@
         </div>
         <div class="categories">
             @for (category of categories | async; track $index) {
-                <button [ngStyle]="{'background-color': category.color, 'color': pickTextColorBasedOnBgColor(category.color)}" class="category">
+                <button routerLink="category/{{ category.id }}" [ngStyle]="{'background-color': category.color, 'color': pickTextColorBasedOnBgColor(category.color)}" class="category">
                     <div class="icon">{{ category.icon }}</div>
                     <div class="name">{{ category.name }}</div>
                     <!-- <div class="total-spent">100 CHF</div> -->
