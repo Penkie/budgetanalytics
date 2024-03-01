@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { inject } from '@angular/core';
 import { PocketbaseService } from './common/services/pocketbase.service';
 import { CategoryComponent } from './category/category.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 export const routes: Routes = [
     {
@@ -22,5 +23,9 @@ export const routes: Routes = [
     {
         path: 'category/:id',
         component: CategoryComponent
+    },
+    {
+        path: 'transaction',
+        component: TransactionComponent
     }
 ];

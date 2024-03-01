@@ -8,16 +8,7 @@
 </div>
 <div class="manage-box">
     <div class="preview">
-        <div
-            [ngStyle]="{
-                'background-color': selectedColor,
-                color: pickTextColorBasedOnBgColor(selectedColor)
-            }"
-            class="category"
-        >
-            <div class="icon">{{ selectedIcon }}</div>
-            <div class="name">{{ nameModel ? nameModel : '\<new category>' }}</div>
-        </div>
+        <category-item [color]="selectedColor" [icon]="selectedIcon" [name]="nameModel ? nameModel : '\<new category>'"></category-item>
     </div>
     <form (submit)="editionMode ? editCategory() : createCategory()" class="category-form">
         <div class="name">
