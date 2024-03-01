@@ -26,4 +26,4 @@ COPY --from=build /usr/local/app/dist/budgetanalytics /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 8045
