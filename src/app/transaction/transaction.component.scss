@@ -1,0 +1,148 @@
+:host {
+    max-width: 850px;
+    margin: 0 auto;
+    display: block;
+
+    .heading {
+        text-align: center;
+        margin: 25px 0;
+
+        .title {
+            font-family: "Sentient-Variable";
+            font-size: large;
+        }
+    }
+
+    .back-btn {
+        all: unset;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.075);
+        }
+    }
+
+    .box {
+        border-radius: 8px;
+        background-color: white;
+        height: fit-content;
+        width: fit-content;
+        width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+            rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 20px;
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-family: "Sentient-Variable";
+                margin-bottom: 5px;
+                display: block;
+            }
+
+            input {
+                padding: 10px;
+                border-radius: 8px;
+                font-family: "Switzer-Variable";
+                font-size: 16px;
+                border: unset;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                width: 150px;
+            }
+
+            .input-container {
+                .currency {
+                    font-size: 18px;
+                    margin-left: 5px;
+                }
+            }
+
+            .form-element {
+                &:not(:first-child) {
+                    margin-top: 20px;
+                }
+            }
+
+            .categories {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+
+                category-item {
+                    border: 1px solid rgba(255, 255, 255, 0);
+
+                    ::ng-deep.category {
+                        flex-direction: row;
+                        width: 200px;
+                        align-items: center;
+                        height: 100%;
+                        cursor: pointer;
+
+                        .icon {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+
+                .selected {
+                    border: 2px solid black;
+                    border-radius: 12px;
+                }
+            }
+
+            .actions {
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+
+                .main-btn {
+                    all: unset;
+                    padding: 10px;
+                    border-radius: 8px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    width: fit-content;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        margin-right: 5px;
+                    }
+
+                    &:not(:first-child) {
+                        margin-left: 5px;
+                    }
+
+                    &:hover {
+                        background-color: rgb(250, 250, 250);
+                    }
+                }
+
+                .secondary-btn {
+                    all: unset;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border-radius: 8px;
+                    margin-left: 5px;
+
+                    &:hover {
+                        background-color: rgb(250, 250, 250);
+                    }
+                }
+            }
+        }
+    }
+}

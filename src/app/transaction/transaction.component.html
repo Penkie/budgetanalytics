@@ -1,0 +1,62 @@
+<!-- TODO: don't repeat this part of the code (maybe a heading page component ?) -->
+<div class="heading">
+    <span class="title">Add one or many transactions</span>
+</div>
+<div class="back-container">
+    <button routerLink="/" class="back-btn">
+        <img width="25" src="assets/icons/arrow_back.svg" alt="arrow_back" />
+    </button>
+</div>
+<div class="box">
+    <form (submit)="save(false)" [formGroup]="createTransactionForm">
+        <div class="form-element">
+            <label for="how-much">How much</label>
+            <div class="input-container">
+                <input
+                    formControlName="amount"
+                    type="number"
+                    name="how-much"
+                    id="how-much"
+                />
+                <span class="currency">CHF</span>
+            </div>
+        </div>
+        <div class="form-element">
+            <label for="how-much">What</label>
+            <div class="input-container">
+                <input
+                    formControlName="description"
+                    type="text"
+                    name="what"
+                    id="what"
+                />
+            </div>
+        </div>
+        <div class="form-element">
+            <label>Category</label>
+            <div class="categories">
+                @for (category of categories; track $index) {
+                <category-item
+                    [name]="category.name"
+                    [icon]="category.icon"
+                    [color]="category.color"
+                    (click)="selectedCategory = category"
+                    [ngClass]="category === selectedCategory ? 'selected' : ''"
+                ></category-item>
+                }
+            </div>
+        </div>
+        <div class="form-element">
+            <label for="how-much">When</label>
+            <input formControlName="date" type="date" name="date" id="date" />
+        </div>
+        <div class="actions">
+            <button class="main-btn" class="main-btn" type="submit">
+                Save and next
+            </button>
+            <button type="button" (click)="save(true)" class="secondary-btn">
+                Save and close
+            </button>
+        </div>
+    </form>
+</div>

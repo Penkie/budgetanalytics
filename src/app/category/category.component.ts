@@ -6,11 +6,19 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AlertComponent } from '../common/components/alert.component';
 import { Category } from '../common/models/category';
 import { CategoryItemComponent } from '../common/components/category-item.component';
+import { IconButtonComponent } from '../common/components/icon-button.component';
 
 @Component({
     selector: 'app-category',
     standalone: true,
-    imports: [CommonModule, FormsModule, AlertComponent, RouterModule, CategoryItemComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        AlertComponent,
+        RouterModule,
+        CategoryItemComponent,
+        IconButtonComponent,
+    ],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
 })
@@ -67,18 +75,24 @@ export class CategoryComponent implements OnInit {
             return;
         }
 
-        this.pocketbaseService.editCategory(this.currentCategory.id, this.nameModel, this.selectedColor, this.selectedIcon)
-          .subscribe({
-            next: (res) => {
-              if (res.id) {
-                // successfull, return to home page
-                this.router.navigate(['']);
-              }
-            },
-            error: () => {
-              this.sendError = 'Something went wrong while saving';
-            }
-          })
+        this.pocketbaseService
+            .editCategory(
+                this.currentCategory.id,
+                this.nameModel,
+                this.selectedColor,
+                this.selectedIcon
+            )
+            .subscribe({
+                next: (res) => {
+                    if (res.id) {
+                        // successfull, return to home page
+                        this.router.navigate(['']);
+                    }
+                },
+                error: () => {
+                    this.sendError = 'Something went wrong while saving';
+                },
+            });
     }
 
     public createCategory(): void {
@@ -105,17 +119,18 @@ export class CategoryComponent implements OnInit {
             });
     }
 
-    public deleteCategory(): void {
-      this.pocketbaseService.deleteCategory(this.currentCategory.id)
-        .subscribe({
-          next: (val) => {
-            if (val) {
-              this.router.navigate(['']);
-            }
-          },
-          error: () => {
-            this.sendError = 'Error while deleting category';
-          }
-        })
+    public deleteCategory(): void {
+        this.pocketbaseService
+            .deleteCategory(this.currentCategory.id)
+            .subscribe({
+                next: (val) => {
+                    if (val) {
+                        this.router.navigate(['']);
+                    }
+                },
+                error: () => {
+                    this.sendError = 'Error while deleting category';
+                },
+            });
     }
 }

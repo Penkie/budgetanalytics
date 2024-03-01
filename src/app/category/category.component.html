@@ -1,19 +1,32 @@
 <div class="heading">
-    <span class="title">{{ editionMode ? 'Edit a category' : 'Create a new category' }}</span>
+    <span class="title">{{
+        editionMode ? "Edit a category" : "Create a new category"
+    }}</span>
 </div>
 <div class="back-container">
-    <button routerLink="/" class="back-btn">
-        <img width="25" src="assets/icons/arrow_back.svg" alt="arrow_back">
-    </button>
+    <icon-button iconName="arrow_back" pathToUrl="/"></icon-button>
 </div>
 <div class="manage-box">
     <div class="preview">
-        <category-item [color]="selectedColor" [icon]="selectedIcon" [name]="nameModel ? nameModel : '\<new category>'"></category-item>
+        <category-item
+            [color]="selectedColor"
+            [icon]="selectedIcon"
+            [name]="nameModel ? nameModel : '\<new category>'"
+        ></category-item>
     </div>
-    <form (submit)="editionMode ? editCategory() : createCategory()" class="category-form">
+    <form
+        (submit)="editionMode ? editCategory() : createCategory()"
+        class="category-form"
+    >
         <div class="name">
             <label for="name">Name</label>
-            <input autofocus [(ngModel)]="nameModel" type="text" name="name" id="name" />
+            <input
+                autofocus
+                [(ngModel)]="nameModel"
+                type="text"
+                name="name"
+                id="name"
+            />
         </div>
         <div class="colors-container">
             <label>Color</label>
@@ -43,18 +56,16 @@
             </div>
         </div>
         <div class="actions">
-            <button type="submit" class="submit">
-                Save
-            </button>
+            <button type="submit" class="submit">Save</button>
             @if (editionMode) {
-                <button (click)="deleteCategory()" class="delete">
-                    <img width="20" src="assets/icons/delete.svg" alt="delete">
-                    Delete
-                </button>
+            <button (click)="deleteCategory()" class="delete">
+                <img width="20" src="assets/icons/delete.svg" alt="delete" />
+                Delete
+            </button>
             }
         </div>
         @if (sendError) {
-            <alert [message]="sendError" [type]="'error'"></alert>
+        <alert [message]="sendError" [type]="'error'"></alert>
         }
     </form>
 </div>

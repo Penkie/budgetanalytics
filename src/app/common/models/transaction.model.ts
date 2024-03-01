@@ -5,6 +5,7 @@ export interface Transaction {
     amount: number;
     description: string;
     date: Date;
+    id: string;
 
     // pb specific
     collectionId?: string;

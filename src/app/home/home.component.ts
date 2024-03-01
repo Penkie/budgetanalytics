@@ -8,11 +8,18 @@ import { Router, RouterModule } from '@angular/router';
 import { Category } from '../common/models/category';
 import { Observable, map, switchMap, tap } from 'rxjs';
 import { CategoryItemComponent } from '../common/components/category-item.component';
+import { IconButtonComponent } from '../common/components/icon-button.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [CommonModule, NgxEchartsDirective, RouterModule, CategoryItemComponent],
+    imports: [
+        CommonModule,
+        NgxEchartsDirective,
+        RouterModule,
+        CategoryItemComponent,
+        IconButtonComponent,
+    ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     providers: [provideEcharts()],
