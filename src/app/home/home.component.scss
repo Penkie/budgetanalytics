@@ -216,6 +216,12 @@
 
             category-item {
                 width: 100%;
+                transition: 0.1s;
+
+                &:hover {
+                    transform: scale(1.02);
+                    opacity: 0.9;
+                }
 
                 ::ng-deep.category {
                     cursor: pointer;
