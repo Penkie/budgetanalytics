@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import type { EChartsOption } from 'echarts';
 import { PocketbaseService } from '../common/services/pocketbase.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Category } from '../common/models/category';
 import { Observable, map, switchMap, tap } from 'rxjs';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [CommonModule, NgxEchartsDirective],
+    imports: [CommonModule, NgxEchartsDirective, RouterModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     providers: [provideEcharts()],

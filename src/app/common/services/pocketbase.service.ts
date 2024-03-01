@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import PocketBase, { AuthModel, ListResult, RecordModel } from 'pocketbase';
 import { Transaction } from '../models/transaction.model';
-import { Observable, from, map, tap } from 'rxjs';
+import { Observable, from, map, of, tap } from 'rxjs';
 import { Category } from '../models/category';
 
 @Injectable({
@@ -52,10 +52,22 @@ export class PocketbaseService {
         );
     }
 
+    // Categories
+
     public getCategories(): Observable<Array<Category>> {
       return from(this.pb.collection('categories').getList<Category>())
         .pipe(
           map((list) => list.items)
         );
+    }
+
+    public createCategory(name: string, color: string, icon: string): Observable<Category> {
+      // get user
+      const user = this.getUser();
+      if (user) {
+        return from(this.pb.collection('categories').create<Category>({ name, color, icon, user: user['id'] }));
+      }
+
+      return of();
     }
 }

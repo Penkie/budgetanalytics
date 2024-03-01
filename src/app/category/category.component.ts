@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PocketbaseService } from '../common/services/pocketbase.service';
+import { Router } from '@angular/router';
+import { AlertComponent } from '../common/components/alert.component';
 
 @Component({
     selector: 'app-category',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, AlertComponent],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
 })
 export class CategoryComponent {
-    public nameModel = "";
+    public nameModel = '';
 
     public availableColors = [
         '#eb4034',
@@ -25,6 +28,37 @@ export class CategoryComponent {
 
     public availableIcons = ['🏠', '🛒', '🚎'];
     public selectedIcon = '🏠';
+
+    public sendError = false;
+
+    constructor(
+      private pocketbaseService: PocketbaseService,
+      private router: Router
+    ) {}
+
+    public createCategory(): void {
+        if (this.nameModel === '') {
+            return;
+        }
+
+        this.pocketbaseService
+            .createCategory(
+                this.nameModel,
+                this.selectedColor,
+                this.selectedIcon
+            )
+            .subscribe({
+              next: (res) => {
+                if (res.id) {
+                  // successfull, return to home page
+                  this.router.navigate(['']);
+                }
+              },
+              error: () => {
+                this.sendError = true;
+              }
+            });
+    }
 
     // TODO: don't repeat this code
     public pickTextColorBasedOnBgColor(

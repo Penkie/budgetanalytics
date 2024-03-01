@@ -15,7 +15,6 @@
     }
 
     .manage-box {
-        margin: 10px;
         border-radius: 8px;
         background-color: white;
         height: fit-content;
@@ -136,6 +135,10 @@
             width: fit-content;
             margin-top: 25px;
             cursor: pointer;
+        }
+
+        alert {
+            margin-top: 20px;
         }
     }
 }

@@ -14,10 +14,10 @@
             <div class="name">{{ nameModel ? nameModel : '\<new category>' }}</div>
         </div>
     </div>
-    <form class="category-form">
+    <form (submit)="createCategory()" class="category-form">
         <div class="name">
             <label for="name">Name</label>
-            <input [(ngModel)]="nameModel" type="text" name="name" id="name" />
+            <input autofocus [(ngModel)]="nameModel" type="text" name="name" id="name" />
         </div>
         <div class="colors-container">
             <label>Color</label>
@@ -46,8 +46,11 @@
                 }
             </div>
         </div>
-        <button class="submit">
+        <button type="submit" class="submit">
             Save
         </button>
+        @if (sendError) {
+            <alert [message]="'Something went wrong while saving'" [type]="'error'"></alert>
+        }
     </form>
 </div>
