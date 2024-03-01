@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
     public availableIcons = ['🏠', '🛒', '🚎'];
     public selectedIcon = '🏠';
 
-    public sendError = false;
+    public sendError = '';
     public editionMode = false;
     public currentCategory: Category;
 
@@ -75,7 +75,7 @@ export class CategoryComponent implements OnInit {
               }
             },
             error: () => {
-              this.sendError = true;
+              this.sendError = 'Something went wrong while saving';
             }
           })
     }
@@ -99,9 +99,23 @@ export class CategoryComponent implements OnInit {
                     }
                 },
                 error: () => {
-                    this.sendError = true;
+                    this.sendError = 'Something went wrong while saving';
                 },
             });
+    }
+
+    public deleteCategory(): void {
+      this.pocketbaseService.deleteCategory(this.currentCategory.id)
+        .subscribe({
+          next: (val) => {
+            if (val) {
+              this.router.navigate(['']);
+            }
+          },
+          error: () => {
+            this.sendError = 'Error while deleting category';
+          }
+        })
     }
 
     // TODO: don't repeat this code

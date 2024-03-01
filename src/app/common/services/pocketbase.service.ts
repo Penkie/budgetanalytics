@@ -83,4 +83,8 @@ export class PocketbaseService {
 
       return of();
     }
+
+    public deleteCategory(id: string): Observable<boolean> {
+      return from(this.pb.collection('categories').delete(id));
+    }
 }

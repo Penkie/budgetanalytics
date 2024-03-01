@@ -46,11 +46,17 @@
                 }
             </div>
         </div>
-        <button type="submit" class="submit">
-            Save
-        </button>
+        <div class="actions">
+            <button type="submit" class="submit">
+                Save
+            </button>
+            <button (click)="deleteCategory()" class="delete">
+                <img width="20" src="assets/icons/delete.svg" alt="delete">
+                Delete
+            </button>
+        </div>
         @if (sendError) {
-            <alert [message]="'Something went wrong while saving'" [type]="'error'"></alert>
+            <alert [message]="sendError" [type]="'error'"></alert>
         }
     </form>
 </div>
