@@ -6,7 +6,6 @@ import { CategoryItemComponent } from '../common/components/category-item.compon
 import {
     FormControl,
     FormGroup,
-    FormsModule,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
@@ -30,13 +29,15 @@ export class TransactionComponent implements OnInit {
 
     public createTransactionForm = new FormGroup({
         description: new FormControl('', Validators.required),
-        amount: new FormControl(-1, Validators.required),
+        amount: new FormControl(0, Validators.required),
         date: new FormControl(new Date(), Validators.required),
     });
 
     public selectedCategory: Category;
 
     public submitted = false;
+
+    public type: 'expense' | 'income' = 'expense';
 
     constructor(
         private pocketbaseService: PocketbaseService,
@@ -59,8 +60,6 @@ export class TransactionComponent implements OnInit {
             return;
         }
 
-        // negative the amount
-
         const newTransaction = {
             description: this.createTransactionForm.controls.description
                 .value as string,
@@ -68,6 +67,11 @@ export class TransactionComponent implements OnInit {
             date: this.createTransactionForm.controls.date.value as Date,
             category: this.selectedCategory.id,
         };
+
+        // negative the amount
+        if (this.type === 'expense') {
+            newTransaction.amount = Math.abs(newTransaction.amount);
+        }
 
         this.pocketbaseService.createTransaction(newTransaction).subscribe({
             next: (res) => {

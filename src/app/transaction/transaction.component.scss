@@ -36,7 +36,40 @@
         width: 100%;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
             rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        padding: 20px;
+
+        .types {
+            display: flex;
+
+            .type {
+                padding: 10px 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .unselected-left {
+                background-color: rgb(245, 245, 237);
+                border-radius: 8px 0 8px 0;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .unselected-right {
+                background-color: rgb(245, 245, 237);
+                border-radius: 0 8px 0 8px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .box-wrapper {
+            padding: 20px;
+        }
 
         form {
             display: flex;
@@ -59,10 +92,36 @@
                 width: 150px;
             }
 
-            .input-container {
-                .currency {
-                    font-size: 18px;
-                    margin-left: 5px;
+            .form-group {
+                display: flex;
+                align-items: center;
+
+                .form-element {
+                    margin-top: 0 !important;
+
+                    &:not(:first-child) {
+                        margin-left: 10px;
+                        width: 100%;
+                    }
+                }
+
+                .amount-container {
+                    position: relative;
+
+                    .amount-input {
+                        text-indent: 40px;
+                    }
+
+                    .currency {
+                        color: grey;
+                        position: absolute;
+                        bottom: 10px;
+                        left: 10px;
+                    }
+                }
+
+                .description-input {
+                    width: 100%;
                 }
             }
 
@@ -82,9 +141,9 @@
 
                     ::ng-deep.category {
                         flex-direction: row;
-                        width: 200px;
+                        width: 150px;
                         align-items: center;
-                        height: 100%;
+                        height: 40px;
                         cursor: pointer;
 
                         .icon {
@@ -94,8 +153,8 @@
                 }
 
                 .selected {
-                    border: 2px solid black;
-                    border-radius: 12px;
+                    border: 2px solid rgb(185, 185, 185);
+                    border-radius: 10px;
                 }
             }
 

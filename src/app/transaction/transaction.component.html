@@ -8,55 +8,88 @@
     </button>
 </div>
 <div class="box">
-    <form (submit)="save(false)" [formGroup]="createTransactionForm">
-        <div class="form-element">
-            <label for="how-much">How much</label>
-            <div class="input-container">
+    <div class="types">
+        <div
+            (click)="type = 'expense'"
+            [ngClass]="type === 'expense' ? '' : 'unselected-left'"
+            class="type"
+        >
+            Expense
+        </div>
+        <div
+            (click)="type = 'income'"
+            [ngClass]="type === 'income' ? '' : 'unselected-right'"
+            class="type"
+        >
+            Income
+        </div>
+    </div>
+    <div class="box-wrapper">
+        <form (submit)="save(false)" [formGroup]="createTransactionForm">
+            <div class="form-group">
+                <div class="form-element">
+                    <label for="how-much">Amount</label>
+                    <div class="input-container amount-container">
+                        <span class="currency">CHF</span>
+                        <input
+                            class="amount-input"
+                            formControlName="amount"
+                            type="number"
+                            name="how-much"
+                            id="how-much"
+                        />
+                    </div>
+                </div>
+                <div class="form-element">
+                    <label for="how-much">Description</label>
+                    <div class="input-container">
+                        <input
+                            class="description-input"
+                            formControlName="description"
+                            type="text"
+                            name="what"
+                            id="what"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="form-element">
+                <label>Category</label>
+                <div class="categories">
+                    @for (category of categories; track $index) {
+                    <category-item
+                        [name]="category.name"
+                        [icon]="category.icon"
+                        [color]="category.color"
+                        (click)="selectedCategory = category"
+                        [ngClass]="
+                            category === selectedCategory ? 'selected' : ''
+                        "
+                    ></category-item>
+                    }
+                </div>
+            </div>
+            <div class="form-element">
+                <label for="how-much">When</label>
                 <input
-                    formControlName="amount"
-                    type="number"
-                    name="how-much"
-                    id="how-much"
-                />
-                <span class="currency">CHF</span>
-            </div>
-        </div>
-        <div class="form-element">
-            <label for="how-much">What</label>
-            <div class="input-container">
-                <input
-                    formControlName="description"
-                    type="text"
-                    name="what"
-                    id="what"
+                    formControlName="date"
+                    type="date"
+                    name="date"
+                    id="date"
                 />
             </div>
-        </div>
-        <div class="form-element">
-            <label>Category</label>
-            <div class="categories">
-                @for (category of categories; track $index) {
-                <category-item
-                    [name]="category.name"
-                    [icon]="category.icon"
-                    [color]="category.color"
-                    (click)="selectedCategory = category"
-                    [ngClass]="category === selectedCategory ? 'selected' : ''"
-                ></category-item>
-                }
+            <div class="actions">
+                <button class="main-btn" class="main-btn" type="submit">
+                    Save and next
+                </button>
+                <button
+                    type="button"
+                    (click)="save(true)"
+                    class="secondary-btn"
+                >
+                    Save and close
+                </button>
             </div>
-        </div>
-        <div class="form-element">
-            <label for="how-much">When</label>
-            <input formControlName="date" type="date" name="date" id="date" />
-        </div>
-        <div class="actions">
-            <button class="main-btn" class="main-btn" type="submit">
-                Save and next
-            </button>
-            <button type="button" (click)="save(true)" class="secondary-btn">
-                Save and close
-            </button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
