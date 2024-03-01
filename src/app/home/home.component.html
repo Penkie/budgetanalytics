@@ -20,7 +20,7 @@
                     />
                     Settings
                 </li>
-                <li class="list-item">
+                <li class="button list-item">
                     <img
                         width="20px"
                         height="20px"
@@ -65,7 +65,13 @@
                                 'background-color': transaction.category.color
                             }"
                         >
-                            {{ transaction.category.icon }}
+                            <img
+                                width="20"
+                                src="assets/category_icons/{{
+                                    transaction.category.icon
+                                }}.fill.svg"
+                                alt="{{ transaction.category.icon }}"
+                            />
                         </div>
                         <div class="what">
                             <span class="description">{{

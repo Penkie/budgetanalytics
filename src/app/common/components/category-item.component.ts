@@ -13,7 +13,13 @@ import { Component, Input } from '@angular/core';
             }"
             class="category"
         >
-            <div class="icon">{{ icon }}</div>
+            <div class="icon">
+                <img
+                    width="25"
+                    src="assets/category_icons/{{ icon }}.fill.svg"
+                    alt="{{ icon }}"
+                />
+            </div>
             <div class="name">{{ name }}</div>
         </div>
     `,
@@ -29,7 +35,13 @@ import { Component, Input } from '@angular/core';
                 width: fit-content;
 
                 .icon {
-                    font-size: 24px;
+                    width: fit-content;
+                    border-radius: 50%;
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }

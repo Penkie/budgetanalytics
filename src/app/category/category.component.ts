@@ -7,6 +7,7 @@ import { AlertComponent } from '../common/components/alert.component';
 import { Category } from '../common/models/category';
 import { CategoryItemComponent } from '../common/components/category-item.component';
 import { IconButtonComponent } from '../common/components/icon-button.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-category',
@@ -18,6 +19,7 @@ import { IconButtonComponent } from '../common/components/icon-button.component'
         RouterModule,
         CategoryItemComponent,
         IconButtonComponent,
+        HttpClientModule,
     ],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
@@ -36,8 +38,8 @@ export class CategoryComponent implements OnInit {
     ];
     public selectedColor = '#eb4034';
 
-    public availableIcons = ['🏠', '🛒', '🚎'];
-    public selectedIcon = '🏠';
+    public availableIcons: Array<string> = [];
+    public selectedIcon: string;
 
     public sendError = '';
     public editionMode = false;
@@ -46,7 +48,8 @@ export class CategoryComponent implements OnInit {
     constructor(
         private pocketbaseService: PocketbaseService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private http: HttpClient
     ) {}
 
     public ngOnInit(): void {
@@ -68,6 +71,15 @@ export class CategoryComponent implements OnInit {
                 },
             });
         }
+
+        this.http
+            .get<Array<string>>(`assets/category_icons/icons.json`)
+            .subscribe({
+                next: (list_icons) => {
+                    this.availableIcons = list_icons;
+                    this.selectedIcon = list_icons[0];
+                },
+            });
     }
 
     public editCategory(): void {

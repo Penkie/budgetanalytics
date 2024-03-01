@@ -50,7 +50,11 @@
                     [ngClass]="icon === selectedIcon ? 'selected-icon' : ''"
                     class="icon"
                 >
-                    {{ icon }}
+                    <img
+                        width="20"
+                        src="assets/category_icons/{{ icon }}.fill.svg"
+                        alt="{{ icon }}"
+                    />
                 </div>
                 }
             </div>
