@@ -50,10 +50,12 @@
             <button type="submit" class="submit">
                 Save
             </button>
-            <button (click)="deleteCategory()" class="delete">
-                <img width="20" src="assets/icons/delete.svg" alt="delete">
-                Delete
-            </button>
+            @if (editionMode) {
+                <button (click)="deleteCategory()" class="delete">
+                    <img width="20" src="assets/icons/delete.svg" alt="delete">
+                    Delete
+                </button>
+            }
         </div>
         @if (sendError) {
             <alert [message]="sendError" [type]="'error'"></alert>
