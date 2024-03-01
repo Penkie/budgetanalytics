@@ -1,8 +1,7 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 850px;
+    margin: 0 auto;
+    display: block;
 
     .heading {
         text-align: center;
@@ -14,14 +13,29 @@
         }
     }
 
+    .back-btn {
+        all: unset;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.075);
+        }
+    }
+
     .manage-box {
         border-radius: 8px;
         background-color: white;
         height: fit-content;
         width: fit-content;
+        width: 100%;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
             rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        min-width: 50%;
         padding: 20px;
 
         .preview {

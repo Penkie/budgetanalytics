@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PocketbaseService } from '../common/services/pocketbase.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AlertComponent } from '../common/components/alert.component';
 import { Category } from '../common/models/category';
 
 @Component({
     selector: 'app-category',
     standalone: true,
-    imports: [CommonModule, FormsModule, AlertComponent],
+    imports: [CommonModule, FormsModule, AlertComponent, RouterModule],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
 })
