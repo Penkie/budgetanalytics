@@ -70,7 +70,7 @@ export class TransactionComponent implements OnInit {
 
         // negative the amount
         if (this.type === 'expense') {
-            newTransaction.amount = Math.abs(newTransaction.amount);
+            newTransaction.amount = -newTransaction.amount;
         }
 
         this.pocketbaseService.createTransaction(newTransaction).subscribe({

@@ -137,7 +137,13 @@
                 gap: 5px;
 
                 category-item {
-                    border: 1px solid rgba(255, 255, 255, 0);
+                    border: 3px solid rgba(255, 255, 255, 0);
+                    transition: 0.1s;
+
+                    &:hover {
+                        transform: scale(1.02);
+                        opacity: 0.9;
+                    }
 
                     ::ng-deep.category {
                         flex-direction: row;
@@ -153,7 +159,7 @@
                 }
 
                 .selected {
-                    border: 2px solid rgb(185, 185, 185);
+                    border: 3px solid rgb(193, 193, 193);
                     border-radius: 10px;
                 }
             }
