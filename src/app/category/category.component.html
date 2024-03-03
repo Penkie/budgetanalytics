@@ -1,12 +1,7 @@
-<div class="heading">
-    <span class="title">{{
-        editionMode ? "Edit a category" : "Create a new category"
-    }}</span>
-</div>
-<div class="back-container">
-    <icon-button iconName="arrow_back" pathToUrl="/"></icon-button>
-</div>
-<div class="manage-box">
+<default-page
+    [title]="editionMode ? 'Edit a category' : 'Create a new category'"
+    goBackPathUrl="/"
+>
     <div class="preview">
         <category-item
             [color]="selectedColor"
@@ -72,4 +67,4 @@
         <alert [message]="sendError" [type]="'error'"></alert>
         }
     </form>
-</div>
+</default-page>

@@ -8,6 +8,7 @@ import { Category } from '../common/models/category';
 import { CategoryItemComponent } from '../common/components/category-item.component';
 import { IconButtonComponent } from '../common/components/icon-button.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DefaultPageComponent } from '../common/components/default-page.component';
 
 @Component({
     selector: 'app-category',
@@ -20,6 +21,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
         CategoryItemComponent,
         IconButtonComponent,
         HttpClientModule,
+        DefaultPageComponent,
     ],
     templateUrl: './category.component.html',
     styleUrl: './category.component.scss',
