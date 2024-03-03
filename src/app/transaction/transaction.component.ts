@@ -10,6 +10,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DefaultPageComponent } from '../common/components/default-page.component';
 
 @Component({
     selector: 'app-transaction',
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
         CategoryItemComponent,
         ReactiveFormsModule,
         CommonModule,
+        DefaultPageComponent,
     ],
     templateUrl: './transaction.component.html',
     styleUrl: './transaction.component.scss',

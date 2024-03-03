@@ -1,13 +1,4 @@
-<!-- TODO: don't repeat this part of the code (maybe a heading page component ?) -->
-<div class="heading">
-    <span class="title">Add one or many transactions</span>
-</div>
-<div class="back-container">
-    <button routerLink="/" class="back-btn">
-        <img width="25" src="assets/icons/arrow_back.svg" alt="arrow_back" />
-    </button>
-</div>
-<div class="box">
+<default-page title="Add one or many transactions" goBackPathUrl="/">
     <div class="types">
         <div
             (click)="type = 'expense'"
@@ -92,4 +83,4 @@
             </div>
         </form>
     </div>
-</div>
+</default-page>
