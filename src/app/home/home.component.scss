@@ -129,6 +129,12 @@
     }
 
     .last-transactions-box {
+        .heading {
+            .actions {
+                display: flex;
+            }
+        }
+
         .last-transactions {
             max-height: 350px;
             overflow-y: auto;
@@ -136,7 +142,6 @@
             .wrapper {
                 padding: 10px;
             }
-
             .transaction {
                 display: flex;
                 align-items: center;

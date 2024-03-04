@@ -5,12 +5,13 @@ import { inject } from '@angular/core';
 import { PocketbaseService } from './common/services/pocketbase.service';
 import { CategoryComponent } from './category/category.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        canActivate: [() => inject(PocketbaseService).canActivate()]
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
     {
         path: 'auth',
@@ -18,14 +19,18 @@ export const routes: Routes = [
     },
     {
         path: 'category',
-        component: CategoryComponent
+        component: CategoryComponent,
     },
     {
         path: 'category/:id',
-        component: CategoryComponent
+        component: CategoryComponent,
     },
     {
         path: 'transaction',
-        component: TransactionComponent
-    }
+        component: TransactionComponent,
+    },
+    {
+        path: 'transactions',
+        component: TransactionsComponent,
+    },
 ];
