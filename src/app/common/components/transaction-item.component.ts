@@ -6,9 +6,9 @@ import { Transaction } from '../models/transaction.model';
 @Component({
     selector: 'transaction-item',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterModule],
     template: `
-        <div class="transaction">
+        <div routerLink="/transaction/{{ transaction.id }}" class="transaction">
             <div class="info-and-img">
                 <div
                     class="icon"
@@ -54,6 +54,12 @@ import { Transaction } from '../models/transaction.model';
                 align-items: center;
                 padding: 10px;
                 justify-content: space-between;
+                border-radius: 8px;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba(128, 128, 128, 0.075);
+                }
 
                 .info-and-img {
                     display: flex;
