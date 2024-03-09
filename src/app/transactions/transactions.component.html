@@ -12,7 +12,7 @@
             <transaction-item [transaction]="item"></transaction-item>
         </div>
 
-        @if (checkIfFirstDayOfMonth(item.date) && !checkIfFirstDayOfMonth(transactions[$index + 1].date)) {
+        @if (transactions[$index + 1] && checkIfDifferentMonthBetweenTwoDates(item.date, transactions[$index + 1].date)) {
             <div class="month">
                 {{ formatDateToMonthName(transactions[$index + 1].date) }}
             </div>

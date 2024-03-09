@@ -26,9 +26,13 @@ export class TransactionsComponent implements OnInit {
         });
     }
 
-    public checkIfFirstDayOfMonth(date: Date): boolean {
-        const dateObj = new Date(date);
-        return getDate(dateObj) === 1 ? true : false;
+    public checkIfDifferentMonthBetweenTwoDates(date1: Date, date2: Date): boolean {
+        const date1Obj = new Date(date1);
+        const date2Obj = new Date(date2);
+        if (date1Obj.getMonth() !== date2Obj.getMonth()) {
+            return true
+        };
+        return false;
     }
 
     public formatDateToMonthName(date: Date): string {
