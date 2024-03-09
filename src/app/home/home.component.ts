@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { CategoryItemComponent } from '../common/components/category-item.component';
 import { IconButtonComponent } from '../common/components/icon-button.component';
 import { endOfMonth, format, startOfMonth } from 'date-fns';
+import { TransactionItemComponent } from '../common/components/transaction-item.component';
 
 @Component({
     selector: 'app-home',
@@ -20,6 +21,7 @@ import { endOfMonth, format, startOfMonth } from 'date-fns';
         RouterModule,
         CategoryItemComponent,
         IconButtonComponent,
+        TransactionItemComponent,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',

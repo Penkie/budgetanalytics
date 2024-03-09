@@ -61,44 +61,9 @@
         <div class="last-transactions">
             @for (transaction of transactions; track $index) {
             <div class="wrapper">
-                <div class="transaction">
-                    <div class="info-and-img">
-                        <div
-                            class="icon"
-                            [ngStyle]="{
-                                'background-color': transaction.category.color
-                            }"
-                        >
-                            <img
-                                width="20"
-                                src="assets/category_icons/{{
-                                    transaction.category.icon
-                                }}.fill.svg"
-                                alt="{{ transaction.category.icon }}"
-                            />
-                        </div>
-                        <div class="what">
-                            <span class="description">{{
-                                transaction.description
-                            }}</span>
-                            <span class="type-name">{{
-                                transaction.category.name
-                            }}</span>
-                        </div>
-                    </div>
-                    <div class="amount-and-date">
-                        <div
-                            [ngClass]="{
-                                red: transaction.amount < 0,
-                                green: transaction.amount > 0
-                            }"
-                            class="amount"
-                        >
-                            {{ transaction.amount }} {{ currency }}
-                        </div>
-                        <div class="date">{{ transaction.date | date }}</div>
-                    </div>
-                </div>
+                <transaction-item
+                    [transaction]="transaction"
+                ></transaction-item>
             </div>
             @if ($index != transactions.length - 1) {
             <div class="seperation"></div>

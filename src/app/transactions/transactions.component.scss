@@ -1,2 +1,28 @@
 :host {
+    default-page {
+        ::ng-deep.box {
+            padding: 0 !important;
+        }
+    }
+
+    .transactions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wrapper {
+        padding: 10px;
+    }
+
+    .seperation {
+        height: 1px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .month {
+        padding: 20px 20px 0 20px;
+        font-size: large;
+        font-family: "Sentient-Variable";
+    }
 }

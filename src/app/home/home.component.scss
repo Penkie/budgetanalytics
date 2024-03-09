@@ -142,58 +142,6 @@
             .wrapper {
                 padding: 10px;
             }
-            .transaction {
-                display: flex;
-                align-items: center;
-                padding: 10px;
-                justify-content: space-between;
-
-                .info-and-img {
-                    display: flex;
-
-                    .icon {
-                        margin-right: 10px;
-                        width: 40px;
-                        height: 40px;
-                        padding: 10px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 50%;
-                    }
-
-                    .what {
-                        display: flex;
-                        flex-direction: column;
-
-                        .type-name {
-                            font-size: 12px;
-                            color: grey;
-                        }
-
-                        span {
-                            display: block;
-                        }
-                    }
-                }
-
-                .amount-and-date {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                }
-
-                .amount {
-                    align-self: flex-end;
-                }
-
-                .date {
-                    align-self: flex-end;
-                    font-size: 12px;
-                    color: grey;
-                    margin-top: 2px;
-                }
-            }
 
             .seperation {
                 height: 1px;

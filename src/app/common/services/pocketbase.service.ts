@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import PocketBase, { AuthModel, ListResult, RecordModel } from 'pocketbase';
+import PocketBase, {
+    AuthModel,
+    ListResult,
+    RecordListOptions,
+    RecordModel,
+} from 'pocketbase';
 import { Transaction } from '../models/transaction.model';
 import { Observable, from, map, of, tap } from 'rxjs';
 import { Category } from '../models/category';
@@ -41,17 +46,31 @@ export class PocketbaseService {
     // Transactions
 
     public getTransactions(
-        fromDate: string,
-        toDate: string
+        fromDate?: string,
+        toDate?: string,
+        page?: number,
+        perPage = 50
     ): Observable<Array<Transaction>> {
+        // default params
+        const pbParams: RecordListOptions = {
+            expand: 'category',
+            sort: '-date',
+            perPage,
+        };
+
+        // add params from method arguments
+        if (fromDate && toDate) {
+            pbParams.filter = `date >= "${fromDate}" && date <= "${toDate}"`;
+        }
+
+        if (page) {
+            pbParams.page = page;
+        }
+
         return from(
             this.pb
                 .collection('transactions')
-                .getList<Transaction>(undefined, undefined, {
-                    expand: 'category',
-                    sort: '-date',
-                    filter: `date >= "${fromDate}" && date <= "${toDate}"`,
-                })
+                .getList<Transaction>(undefined, undefined, pbParams)
         ).pipe(
             map((list) => list.items),
             tap((items) => {

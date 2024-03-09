@@ -26,6 +26,7 @@ import { IconButtonComponent } from './icon-button.component';
             max-width: 850px;
             margin: 0 auto;
             display: block;
+            padding-bottom: 20px;
 
             .heading {
                 text-align: center;

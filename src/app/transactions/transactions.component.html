@@ -1,1 +1,24 @@
-test!
+<default-page title="All transactions" goBackPathUrl="/">
+    <div class="transactions">
+        @for (item of transactions; track $index) {
+
+        @if($index === 0) {
+            <div class="month">
+                {{ formatDateToMonthName(item.date) }}
+            </div>
+        }
+        
+        <div class="wrapper">
+            <transaction-item [transaction]="item"></transaction-item>
+        </div>
+
+        @if (checkIfFirstDayOfMonth(item.date) && !checkIfFirstDayOfMonth(transactions[$index + 1].date)) {
+            <div class="month">
+                {{ formatDateToMonthName(transactions[$index + 1].date) }}
+            </div>
+        } @else if ($index != transactions.length - 1) {
+            <div class="seperation"></div>
+        }
+        }
+    </div>
+</default-page>
