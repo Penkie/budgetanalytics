@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
     }
 
     public constructPieChartData(): Array<{ value: number; name: string }> {
-        const data: Array<{ value: number; name: string }> = [];
+        const data: Array<{ value: number; name: string, itemStyle: { color: string } }> = [];
 
         this.transactions.forEach((transaction) => {
             if (transaction.amount < 0) {
@@ -127,6 +127,9 @@ export class HomeComponent implements OnInit {
                     data.push({
                         name: transaction.category.name,
                         value: transaction.amount,
+                        itemStyle: {
+                            color: transaction.category.color
+                        }
                     });
                 }
             }
