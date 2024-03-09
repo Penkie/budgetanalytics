@@ -133,8 +133,19 @@
 
             .actions {
                 display: flex;
-                align-items: center;
+                justify-content: space-between;
                 margin-top: 20px;
+                width: 100%;
+
+                .btn-wrapper {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .delete {
+                    background-color: rgb(224, 68, 68) !important;
+                    color: white !important;
+                }
 
                 .main-btn {
                     all: unset;

@@ -1,4 +1,4 @@
-<default-page title="Add one or many transactions" goBackPathUrl="/">
+<default-page [title]="editionMode ? 'Edit a transaction' : 'Add one or many transactions'" goBackPathUrl="/">
     <div class="types">
         <div
             (click)="type = 'expense'"
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="box-wrapper">
-        <form (submit)="save(true)" [formGroup]="createTransactionForm">
+        <form (submit)="editionMode ? edit() : save(true)" [formGroup]="createTransactionForm">
             <div class="form-group">
                 <div class="form-element">
                     <label for="how-much">Amount</label>
@@ -70,16 +70,26 @@
                 />
             </div>
             <div class="actions">
-                <button class="main-btn" class="main-btn" type="submit">
-                    Save & close
-                </button>
-                <button
-                    type="button"
-                    (click)="save(false)"
-                    class="secondary-btn"
-                >
-                    Save and keep adding
-                </button>
+                <div class="btn-wrapper">
+                    <button class="main-btn" class="main-btn" type="submit">
+                        Save & close
+                    </button>
+                    @if (!editionMode) {
+                        <button
+                            type="button"
+                            (click)="save(false)"
+                            class="secondary-btn"
+                        >
+                            Save and keep adding
+                        </button>
+                    }
+                </div>
+                <div>
+                    <button (click)="deleteTransaction()" class="main-btn delete">
+                        <img width="20" src="assets/icons/delete.svg" alt="delete" />
+                        Delete
+                    </button>
+                </div>
             </div>
         </form>
     </div>

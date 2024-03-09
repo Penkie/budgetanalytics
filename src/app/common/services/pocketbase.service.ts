@@ -81,6 +81,10 @@ export class PocketbaseService {
         );
     }
 
+    public getTransactionById(id: string): Observable<Transaction> {
+        return from(this.pb.collection('transactions').getOne<Transaction>(id));
+    }
+
     public createTransaction(data: {
         description: string;
         amount: number;
@@ -96,6 +100,28 @@ export class PocketbaseService {
             );
         }
         return of();
+    }
+
+    public editTransaction(data: {
+        id: string,
+        description: string;
+        amount: number;
+        category: string;
+        date: Date;
+        user?: string;
+    }): Observable<Transaction> {
+        const user = this.getUser();
+        if (user) {
+            data.user = user['id'];
+            return from(
+                this.pb.collection('transactions').update<Transaction>(data.id, data)
+            );
+        }
+        return of();
+    }
+
+    public deleteTransaction(id: string): Observable<boolean> {
+        return from(this.pb.collection('transactions').delete(id));
     }
 
     // Categories

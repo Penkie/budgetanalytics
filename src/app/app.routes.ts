@@ -30,6 +30,10 @@ export const routes: Routes = [
         component: TransactionComponent,
     },
     {
+        path: 'transaction/:id',
+        component: TransactionComponent
+    },
+    {
         path: 'transactions',
         component: TransactionsComponent,
     },
