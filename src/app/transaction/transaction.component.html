@@ -85,10 +85,12 @@
                     }
                 </div>
                 <div>
-                    <button (click)="deleteTransaction()" class="main-btn delete">
-                        <img width="20" src="assets/icons/delete.svg" alt="delete" />
-                        Delete
-                    </button>
+                    @if (editionMode) {
+                        <button (click)="deleteTransaction()" class="main-btn delete">
+                            <img width="20" src="assets/icons/delete.svg" alt="delete" />
+                            Delete
+                        </button>
+                    }
                 </div>
             </div>
         </form>
