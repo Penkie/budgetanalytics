@@ -3,15 +3,9 @@
         <span class="title">Welcome to your budget !</span>
         <span class="sub-title">Please sign in to your account</span>
     </div>
-    <div class="socials">
-        <button class="social-btn" (click)="login('google')">
-            <img width="15" height="15" src="assets/icons/google_icon.png" alt="google">
-            Continue with Google
-        </button>
-    </div>
     <div class="seperation">
         <div class="bar"></div>
-        <div class="text">or</div>
+        <div class="text">{{ authMode === 'signin' ? 'Log In' : 'Sign Up' }}</div>
         <div class="bar"></div>
     </div>
     @if (registerSuccess) {
@@ -42,7 +36,7 @@
                 <alert message="Incorrect email or password" type="error" />
             }
         </form>
-        <span class="account">Don't have an account yet ? <span (click)="authMode = 'signup'">Register here</span></span>
+        <span class="account">Don't have an account yet ? <span class="change-mode" (click)="authMode = 'signup'">Register here</span></span>
     } @else if (authMode === 'signup') {
         <form [formGroup]="registerForm" (submit)="submitRegister()" class="auth-form">
             <div class="input-group">
@@ -77,6 +71,17 @@
                 <alert message="{{ errorOnRegister }}" type="error" />
             }
         </form>
-        <span class="account">Already have an account ? <span (click)="authMode = 'signin'">Login here</span></span>
+        <span class="account">Already have an account ? <span class="change-mode" (click)="authMode = 'signin'">Login here</span></span>
     }
+    <div class="seperation">
+        <div class="bar"></div>
+        <div class="text">or</div>
+        <div class="bar"></div>
+    </div>
+    <div class="socials">
+        <button class="social-btn" (click)="login('google')">
+            <img width="15" height="15" src="assets/icons/google_icon.png" alt="google">
+            Continue with Google
+        </button>
+    </div>
 </div>
