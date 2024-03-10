@@ -37,6 +37,14 @@ export class CategoryComponent implements OnInit {
         '#2a97d1',
         '#862ad1',
         '#d12aad',
+        '#74a2a2',
+        '#82929e',
+        '#e5c54f',
+        '#556b2f',
+        '#6f4e37',
+        '#672c47',
+        '#1c537a',
+        '#8a2be2'
     ];
     public selectedColor = '#eb4034';
 
