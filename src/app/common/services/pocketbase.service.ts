@@ -19,11 +19,19 @@ export class PocketbaseService {
 
     constructor(private router: Router) {}
 
+    // auth
+
     public async authWithProvider(
         provider: 'google'
     ): Promise<{ token: string }> {
         return await this.pb.collection('users').authWithOAuth2({ provider });
     }
+
+    public authWithEmail(email: string, password: string): Observable<unknown> {
+        return from(this.pb.collection('users').authWithPassword(email, password));
+    }
+
+    // auth guard
 
     public canActivate(): boolean {
         if (!this.pb.authStore.isValid) {

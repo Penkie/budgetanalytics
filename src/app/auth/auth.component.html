@@ -1,2 +1,44 @@
-<p>auth works!</p>
-<button (click)="login('google')">Login with Google</button>
+<div class="box">
+    <div class="heading">
+        <span class="title">Welcome to your budget !</span>
+        <span class="sub-title">Please sign in to your account</span>
+    </div>
+    <div class="socials">
+        <button class="social-btn" (click)="login('google')">
+            <img width="15" height="15" src="assets/icons/google_icon.png" alt="google">
+            Continue with Google
+        </button>
+    </div>
+    <div class="seperation">
+        <div class="bar"></div>
+        <div class="text">or</div>
+        <div class="bar"></div>
+    </div>
+    @if (authMode === 'signin') {
+        <form [formGroup]="loginForm" (submit)="submit('login')" class="auth-form">
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input class="input-base" formControlName="email" [class.input-error]="submitted && loginForm.controls.email.invalid" placeholder="hello@youremail.com" type="email" name="email">
+                @if (submitted && loginForm.controls.email.invalid) {
+                    <div class="error-message">
+                        E-mail is not valid
+                    </div>
+                }
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input class="input-base" formControlName="password" [class.input-error]="submitted && loginForm.controls.password.invalid" type="password" name="password">
+                @if (submitted && loginForm.controls.password.invalid) {
+                    <div class="error-message">
+                        Password must be filled
+                    </div>
+                }
+            </div>
+            <button type="submit">Sign In</button>
+            @if (errorOnLogin) {
+                <alert message="Incorrect email or password" type="error" />
+            }
+        </form>
+        <span class="account">Don't have an account yet ? Register here</span>
+    }
+</div>
