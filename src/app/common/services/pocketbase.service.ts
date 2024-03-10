@@ -31,6 +31,10 @@ export class PocketbaseService {
         return from(this.pb.collection('users').authWithPassword(email, password));
     }
 
+    public registerWithEmail(email: string, password: string, passwordConfirm: string): Observable<unknown> {
+        return from(this.pb.collection('users').create({ email, password, passwordConfirm }));
+    }
+
     // auth guard
 
     public canActivate(): boolean {

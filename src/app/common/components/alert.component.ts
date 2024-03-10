@@ -7,7 +7,7 @@ import { Component, Input } from "@angular/core";
     imports: [CommonModule],
     template: `
         <div [ngClass]="type" class="alert">
-            <img width="25" [src]="type === 'error' ? 'assets/icons/warning.svg' : ''" alt="warning">
+            <img width="25" [src]="type === 'error' ? 'assets/icons/warning.svg' : 'assets/icons/check.svg'" alt="warning">
             {{ message }}
         </div>
     `,
@@ -31,7 +31,7 @@ import { Component, Input } from "@angular/core";
             }
 
             .success {
-                background-color: #3ec720;
+                background-color: rgba(63, 199, 32, 0.189);
             }
         }
     `
