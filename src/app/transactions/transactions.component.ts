@@ -14,6 +14,7 @@ import { TransactionItemComponent } from '../common/components/transaction-item.
 })
 export class TransactionsComponent implements OnInit {
     public transactions: Transaction[] = [];
+    public loading = true;
     // TODO: handle paging
 
     constructor(private pbService: PocketbaseService) {}
@@ -22,6 +23,7 @@ export class TransactionsComponent implements OnInit {
         this.pbService.getTransactions().subscribe({
             next: (transactions) => {
                 this.transactions = transactions;
+                this.loading = false;
             },
         });
     }

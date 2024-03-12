@@ -21,4 +21,7 @@
         }
         }
     </div>
+    @if(!loading && transactions.length <= 0) {
+       <div class="small-text center-text padding-text">No transaction to display</div> 
+    }
 </default-page>
