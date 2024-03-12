@@ -29,7 +29,7 @@
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input class="input-base" formControlName="password" [class.input-error]="submitted && loginForm.controls.password.invalid" type="password" name="password">
+                <input class="input-base" formControlName="password" [class.input-error]="submitted && loginForm.controls.password.invalid" type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 @if (submitted && loginForm.controls.password.invalid) {
                     <div class="error-message">
                         Password must be filled
@@ -55,7 +55,7 @@
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input class="input-base" formControlName="password" [class.input-error]="submitted && registerForm.controls.password.invalid" type="password" name="password">
+                <input class="input-base" formControlName="password" [class.input-error]="submitted && registerForm.controls.password.invalid" type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 @if (submitted && registerForm.controls.password.invalid) {
                     <div class="error-message">
                         Password must be filled and be at least 8 characters long
@@ -64,7 +64,7 @@
             </div>
             <div class="input-group">
                 <label for="password">Repeat password</label>
-                <input class="input-base" formControlName="repeatPassword" [class.input-error]="submitted && registerForm.controls.repeatPassword.invalid" type="password" name="repeatPassword">
+                <input class="input-base" formControlName="repeatPassword" [class.input-error]="submitted && registerForm.controls.repeatPassword.invalid" type="password" name="repeatPassword" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 @if (submitted && registerForm.controls.password.invalid) {
                     <div class="error-message">
                         Repeated password must be filled
