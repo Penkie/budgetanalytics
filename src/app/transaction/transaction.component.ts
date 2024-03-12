@@ -47,6 +47,8 @@ export class TransactionComponent implements OnInit {
     public editionMode = false;
     public editingTransaction: Transaction;
 
+    public loading = true;
+
     constructor(
         private pocketbaseService: PocketbaseService,
         private router: Router,
@@ -81,6 +83,9 @@ export class TransactionComponent implements OnInit {
                 },
                 error: () => {
                     this.router.navigate(['']);
+                },
+                complete: () => {
+                    this.loading = false;
                 }
             });
     }

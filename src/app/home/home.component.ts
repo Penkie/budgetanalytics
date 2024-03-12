@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
     public totalSpent = 0;
     public totalRevenue = 0;
 
+    public loading = true;
+
     constructor(private pbService: PocketbaseService, private router: Router) {}
 
     public ngOnInit(): void {
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit {
 
         this.pbService.getTransactions(firstDay, lastDay).subscribe((res) => {
             this.transactions = res;
+            this.loading = false;
 
             const chartData = this.constructPieChartData();
             this.calculateTotals();

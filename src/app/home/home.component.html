@@ -69,6 +69,9 @@
             <div class="seperation"></div>
             } }
         </div>
+        @if (!loading && transactions.length <= 0) {
+            <span class="small-text center-text padding-text">No transaction to display</span>
+        }
     </div>
     <div class="analytics-box box">
         <div class="heading">

@@ -58,6 +58,9 @@
                         "
                     ></category-item>
                     }
+                    @if (!loading && categories.length <= 0) {
+                        <div class="small-text">You have no categories created yet. <span routerLink="/category" class="link-text">You need to create one</span> in order to add a transaction.</div>
+                    }
                 </div>
             </div>
             <div class="form-element">
