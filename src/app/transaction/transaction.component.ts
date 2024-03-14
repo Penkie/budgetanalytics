@@ -35,7 +35,7 @@ export class TransactionComponent implements OnInit {
     public createTransactionForm = new FormGroup({
         description: new FormControl('', Validators.required),
         amount: new FormControl(0, Validators.required),
-        date: new FormControl('', Validators.required),
+        date: new FormControl(format(new Date(), 'yyyy-MM-dd'), Validators.required),
     });
 
     public selectedCategory: Category;
@@ -75,6 +75,11 @@ export class TransactionComponent implements OnInit {
                     const selectedCategoryObj = this.categories.find((e) => e.id === transaction.category as unknown as string);
                     if (selectedCategoryObj) {
                         this.selectedCategory = selectedCategoryObj;
+                    }
+
+                    // set type (expense/income)
+                    if (transaction.amount > 0) {
+                        this.type = 'income';
                     }
                     
                     this.createTransactionForm.controls.amount.setValue(Math.abs(transaction.amount));
