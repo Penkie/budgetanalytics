@@ -94,7 +94,10 @@ export class DateSelectionComponent {
 
     public selectValue(range: DateRange): void {
         this.selectedValue = range;
-        this.dateRange.emit(range);
+        // TODO: figure out why on init it doesn't emit on the parent's side and that we have to add a setTimeoutc for it to work
+        setTimeout(() => {
+            this.dateRange.emit(range);
+        });
     }
 
     public changePosition(direction: 'up' | 'down'): void {

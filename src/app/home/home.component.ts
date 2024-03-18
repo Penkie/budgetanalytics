@@ -12,6 +12,7 @@ import { IconButtonComponent } from '../common/components/icon-button.component'
 import { endOfMonth, format, startOfMonth } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
 import { DateSelectionComponent } from '../common/components/date-selection.component';
+import { DateRange } from '../common/models/date-range';
 
 @Component({
     selector: 'app-home',
@@ -49,17 +50,13 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit(): void {
         this.categories = this.pbService.getCategories();
+    }
 
-        const currentDate = new Date();
-        const firstDay = format(
-            startOfMonth(currentDate),
-            "yyyy-MM-dd HH:mm:ss.SSS'Z'"
-        );
-        const lastDay = format(
-            endOfMonth(currentDate),
-            "yyyy-MM-dd HH:mm:ss.SSS'Z'"
-        );
-
+    public filterByDate(range: DateRange): void {
+        this.totalSpent = 0;
+        this.totalRevenue = 0;
+        const firstDay = format(range.from, "yyyy-MM-dd HH:mm:ss.SSS'Z'");
+        const lastDay = format(range.to, "yyyy-MM-dd HH:mm:ss.SSS'Z'");
         this.pbService.getTransactions(firstDay, lastDay).subscribe((res) => {
             this.transactions = res;
             this.loading = false;

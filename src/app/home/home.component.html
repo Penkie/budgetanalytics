@@ -1,6 +1,6 @@
 <div class="top-bar">
     <div class="filter">
-        <date-selection></date-selection>
+        <date-selection (dateRange)="filterByDate($event)" />
     </div>
     <div class="profile">
         <button class="profile-btn">
