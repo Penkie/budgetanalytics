@@ -1,5 +1,7 @@
 <div class="top-bar">
-    <div class="filter">{{ month }} 2024</div>
+    <div class="filter">
+        <date-selection></date-selection>
+    </div>
     <div class="profile">
         <button class="profile-btn">
             <img
@@ -70,7 +72,9 @@
             } }
         </div>
         @if (!loading && transactions.length <= 0) {
-            <span class="small-text center-text padding-text">No transaction to display</span>
+        <span class="small-text center-text padding-text"
+            >No transaction to display</span
+        >
         }
     </div>
     <div class="analytics-box box">

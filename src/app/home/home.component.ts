@@ -11,6 +11,7 @@ import { CategoryItemComponent } from '../common/components/category-item.compon
 import { IconButtonComponent } from '../common/components/icon-button.component';
 import { endOfMonth, format, startOfMonth } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
+import { DateSelectionComponent } from '../common/components/date-selection.component';
 
 @Component({
     selector: 'app-home',
@@ -22,6 +23,7 @@ import { TransactionItemComponent } from '../common/components/transaction-item.
         CategoryItemComponent,
         IconButtonComponent,
         TransactionItemComponent,
+        DateSelectionComponent,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
@@ -117,7 +119,11 @@ export class HomeComponent implements OnInit {
     }
 
     public constructPieChartData(): Array<{ value: number; name: string }> {
-        const data: Array<{ value: number; name: string, itemStyle: { color: string } }> = [];
+        const data: Array<{
+            value: number;
+            name: string;
+            itemStyle: { color: string };
+        }> = [];
 
         this.transactions.forEach((transaction) => {
             if (transaction.amount < 0) {
@@ -131,8 +137,8 @@ export class HomeComponent implements OnInit {
                         name: transaction.category.name,
                         value: transaction.amount,
                         itemStyle: {
-                            color: transaction.category.color
-                        }
+                            color: transaction.category.color,
+                        },
                     });
                 }
             }
