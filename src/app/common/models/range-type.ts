@@ -1,6 +1,5 @@
 export enum RangeType {
-    week,
-    month,
-    ytd,
-    year,
+    week = 'week',
+    month = 'month',
+    year = 'year',
 }
