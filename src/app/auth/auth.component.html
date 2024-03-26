@@ -76,7 +76,7 @@
                 <alert message="{{ errorOnRegister }}" type="error" />
             }
         </form>
-        <span class="account">Already have an account ? <span class="change-mode" (click)="authMode = 'signin'">Login here</span></span>
+        <span class="account">Already have an account ? <span class="change-mode" (click)="authMode = 'signin'; submitted = false">Login here</span></span>
     }
     <div class="seperation">
         <div class="bar"></div>

@@ -75,6 +75,7 @@ export class AuthComponent {
           next: () => {
             this.authMode = 'signin';
             this.registerSuccess = true;
+            this.submitted = false;
           },
           error: (err) => {
             if (err.response && err.response.data && err.response.data.email && err.response.data.email.code === 'validation_invalid_email') {
