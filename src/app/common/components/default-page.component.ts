@@ -23,6 +23,7 @@ import { IconButtonComponent } from './icon-button.component';
     `,
     styles: `
         :host {
+            animation: fadeInScroll 0.3s cubic-bezier(.42,.83,.31,1.28);
             max-width: 850px;
             margin: 0 auto;
             display: block;
