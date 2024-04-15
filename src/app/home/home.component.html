@@ -3,7 +3,7 @@
         <date-selection (dateRange)="filterByDate($event)" />
     </div>
     <div class="profile">
-        <button class="profile-btn">
+        <button (click)="userMenuOpen = !userMenuOpen" (clickOutside)="userMenuOpen = false" class="profile-btn">
             <img
                 width="50px"
                 height="50px"
@@ -11,38 +11,40 @@
                 alt="pp"
             />
         </button>
-        <div class="menu" role="menu">
-            <ul>
-                <li class="button list-item">
-                    <img
-                        width="20px"
-                        height="20px"
-                        src="assets/icons/cog.svg"
-                        alt="cog"
-                    />
-                    Settings
-                </li>
-                <li class="button list-item">
-                    <img
-                        width="20px"
-                        height="20px"
-                        src="assets/icons/moon.svg"
-                        alt="moon"
-                    />
-                    Theme
-                </li>
-                <li class="seperation"></li>
-                <li class="button list-item" (mousedown)="logout()">
-                    <img
-                        width="20px"
-                        height="20px"
-                        src="assets/icons/out.svg"
-                        alt="out"
-                    />
-                    Log out
-                </li>
-            </ul>
-        </div>
+        @if (userMenuOpen) {
+            <div class="menu" role="menu">
+                <ul>
+                    <li class="button list-item">
+                        <img
+                            width="20px"
+                            height="20px"
+                            src="assets/icons/cog.svg"
+                            alt="cog"
+                        />
+                        Settings
+                    </li>
+                    <li class="button list-item">
+                        <img
+                            width="20px"
+                            height="20px"
+                            src="assets/icons/moon.svg"
+                            alt="moon"
+                        />
+                        Theme
+                    </li>
+                    <li class="seperation"></li>
+                    <li class="button list-item" (click)="logout()">
+                        <img
+                            width="20px"
+                            height="20px"
+                            src="assets/icons/out.svg"
+                            alt="out"
+                        />
+                        Log out
+                    </li>
+                </ul>
+            </div>
+        }
     </div>
 </div>
 <div class="grid">

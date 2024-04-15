@@ -9,10 +9,11 @@ import { Category } from '../common/models/category';
 import { Observable } from 'rxjs';
 import { CategoryItemComponent } from '../common/components/category-item.component';
 import { IconButtonComponent } from '../common/components/icon-button.component';
-import { endOfMonth, format, startOfMonth } from 'date-fns';
+import { format } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
 import { DateSelectionComponent } from '../common/components/date-selection.component';
 import { DateRange } from '../common/models/date-range';
+import { ClickOutsideDirective } from '../common/directive/clickoutside.directive';
 
 @Component({
     selector: 'app-home',
@@ -25,6 +26,7 @@ import { DateRange } from '../common/models/date-range';
         IconButtonComponent,
         TransactionItemComponent,
         DateSelectionComponent,
+        ClickOutsideDirective
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
@@ -45,6 +47,8 @@ export class HomeComponent implements OnInit {
     public totalRevenue = 0;
 
     public loading = true;
+    
+    public userMenuOpen = false;
 
     constructor(private pbService: PocketbaseService, private router: Router) {}
 

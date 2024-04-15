@@ -14,14 +14,15 @@ import {
     subWeeks,
     subYears,
 } from 'date-fns';
+import { ClickOutsideDirective } from '../directive/clickoutside.directive';
 
 @Component({
     selector: 'date-selection',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ClickOutsideDirective],
     template: `
         <div class="menu-container">
-            <button class="menu">
+            <button (click)="opened = !opened" (clickOutside)="opened = false" class="menu">
                 {{ type }}
                 <img
                     width="15px"
@@ -29,17 +30,19 @@ import {
                     alt="chevron dwon"
                 />
             </button>
-            <div class="opened-menu">
-                @for (typeItem of types; track $index) {
-                <div
-                    [class.selected]="type === typeItem"
-                    (mousedown)="type = typeItem; setValues()"
-                    class="item"
-                >
-                    {{ typeItem }}
+            @if (opened) {
+                <div class="opened-menu">
+                    @for (typeItem of types; track $index) {
+                    <div
+                        [class.selected]="type === typeItem"
+                        (mousedown)="type = typeItem; setValues()"
+                        class="item"
+                    >
+                        {{ typeItem }}
+                    </div>
+                    }
                 </div>
-                }
-            </div>
+            }
         </div>
         <div class="value-selector">
             <div (click)="changePosition('down')" class="arrow arrow-left">
@@ -90,17 +93,10 @@ import {
                     }
                 }
 
-                .menu:focus + .opened-menu {
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                    transform: translateY(0.2rem);
-
-                }
-
                 .opened-menu {
                     position: absolute;
                     background-color: white;
-                    transform: translateY(0.5rem);
+                    transform: translateY(0.4rem);
                     background-color: white;
                     padding: 5px;
                     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
@@ -108,10 +104,8 @@ import {
                     color: #4e4e4e;
                     z-index: 10;
                     border-radius: 8px;
-
-                    visibility: hidden;
-                    opacity: 0;
-                    transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+                    // opacity: 0;
+                    // transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
 
                     .item {
                         padding: 10px;
@@ -193,6 +187,8 @@ export class DateSelectionComponent {
     public values: Map<string, DateRange> = new Map<string, DateRange>();
 
     public valuesPosition: number = 0;
+
+    public opened = false;
 
     constructor() {
         this.setValues();
