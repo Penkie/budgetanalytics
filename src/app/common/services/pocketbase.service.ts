@@ -15,7 +15,7 @@ import { Category } from '../models/category';
 })
 export class PocketbaseService {
     // TODO: change to env variable
-    private pb = new PocketBase('https://budgetanalytics.oscarprince.ch/api');
+    private pb = new PocketBase('https://api.ba.oscarprince.ch');
 
     constructor(private router: Router) {}
 
