@@ -6,6 +6,7 @@ import { PocketbaseService } from './common/services/pocketbase.service';
 import { CategoryComponent } from './category/category.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const routes: Routes = [
     {
@@ -20,21 +21,31 @@ export const routes: Routes = [
     {
         path: 'category',
         component: CategoryComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
     {
         path: 'category/:id',
         component: CategoryComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
     {
         path: 'transaction',
         component: TransactionComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
     {
         path: 'transaction/:id',
-        component: TransactionComponent
+        component: TransactionComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
     {
         path: 'transactions',
         component: TransactionsComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
     },
+    {
+        path: 'settings',
+        component: SettingsComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
+    }
 ];

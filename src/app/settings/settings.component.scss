@@ -1,0 +1,52 @@
+:host {
+    .title {
+        font-size: large;
+        font-family: "Sentient-Variable";
+    }
+
+    .user-info {
+        display: flex;
+        gap: 15px;
+
+        .profile-picture {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                margin-top: 10px;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+            }
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+
+            .save-btn {
+                width: fit-content;
+                align-self: flex-end;
+            }
+        }
+    }
+
+    .actions {
+        margin-top: 15px;
+        
+        .title {
+            margin-bottom: 15px;
+        }
+
+        .delete-btn {
+            background-color: rgb(224, 68, 68) !important;
+            color: white !important;
+            box-shadow: none;
+        }
+    }
+}

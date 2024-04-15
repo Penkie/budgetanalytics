@@ -14,6 +14,7 @@ import { TransactionItemComponent } from '../common/components/transaction-item.
 import { DateSelectionComponent } from '../common/components/date-selection.component';
 import { DateRange } from '../common/models/date-range';
 import { ClickOutsideDirective } from '../common/directive/clickoutside.directive';
+import { AuthModel } from 'pocketbase';
 
 @Component({
     selector: 'app-home',
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
     public loading = true;
     
     public userMenuOpen = false;
+    public user: AuthModel = this.pbService.getUser();
 
     constructor(private pbService: PocketbaseService, private router: Router) {}
 

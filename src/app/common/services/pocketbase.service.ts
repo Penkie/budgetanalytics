@@ -19,6 +19,12 @@ export class PocketbaseService {
 
     constructor(private router: Router) {}
 
+    // utils
+
+    public getFiles(property: any, file: any): any {
+        return this.pb.files.getUrl(property, file);
+    }
+
     // auth
 
     public async authWithProvider(

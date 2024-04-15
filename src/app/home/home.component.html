@@ -2,19 +2,22 @@
     <div class="filter">
         <date-selection (dateRange)="filterByDate($event)" />
     </div>
-    <div class="profile">
-        <button (click)="userMenuOpen = !userMenuOpen" (clickOutside)="userMenuOpen = false" class="profile-btn">
+    <div (click)="userMenuOpen = !userMenuOpen" (clickOutside)="userMenuOpen = false" class="profile">
+        <button class="profile-btn">
             <img
-                width="50px"
-                height="50px"
-                src="assets/default_pp.png"
+                width="35px"
+                height="35px"
+                src="assets/avatar.svg"
                 alt="pp"
             />
         </button>
+        <span class="username">{{ user!['username'] }}</span>
+
+        <img class="chevron" src="assets/icons/chevron_down.svg" alt="chevron_down" width="20px" height="20px">
         @if (userMenuOpen) {
             <div class="menu" role="menu">
                 <ul>
-                    <li class="button list-item">
+                    <li routerLink="/settings" class="button list-item">
                         <img
                             width="20px"
                             height="20px"

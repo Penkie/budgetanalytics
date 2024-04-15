@@ -28,6 +28,19 @@
 
         .profile {
             position: relative;
+            display: flex;
+            align-items: center;
+            // background-color: white;
+            padding: 5px 8px;
+            // box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+            //     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            gap: 10px;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
 
             .profile-btn {
                 all: initial;
@@ -41,6 +54,7 @@
             .menu {
                 position: absolute;
                 right: 10px;
+                top: 50px;
                 background-color: white;
                 padding: 5px;
                 box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
