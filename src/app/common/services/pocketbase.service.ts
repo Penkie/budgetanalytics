@@ -15,7 +15,7 @@ import { Category } from '../models/category';
 })
 export class PocketbaseService {
     // TODO: change to env variable
-    private pb = new PocketBase('https://api.ba.oscarprince.ch');
+    private pb = new PocketBase('https://api.budgetanalytics.app');
 
     constructor(private router: Router) {}
 
@@ -59,6 +59,14 @@ export class PocketbaseService {
 
     public logoutUser(): void {
         return this.pb.authStore.clear();
+    }
+
+    public saveUser(userId: string, username: string): Observable<AuthModel> {
+        return from(this.pb.collection('users').update(userId, { username }));
+    }
+
+    public requestNewEmail(newEmail: string): Observable<boolean> {
+        return from(this.pb.collection('users').requestEmailChange(newEmail));
     }
 
     // Transactions

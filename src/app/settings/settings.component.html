@@ -10,15 +10,17 @@
             <div class="title">
                 User informations
             </div>
-            <div class="input">
-                <label class="classic-label" for="username">Username</label>
-                <input [(ngModel)]="user!['username']" class="classic-input" type="text" name="username" id="username" />
-            </div>
-            <div class="input">
-                <label class="classic-label" for="email">E-mail</label>
-                <input [(ngModel)]="user!['email']" class="classic-input" type="email" name="email" id="email" />
-            </div>
-            <button class="classic-btn save-btn">Save changes</button>
+            <form class="inputs" [formGroup]="infoFields">
+                <div class="input">
+                    <label class="classic-label" for="username">Username</label>
+                    <input formControlName="username" class="classic-input" type="text" name="username" id="username" />
+                </div>
+                <div class="input">
+                    <label class="classic-label" for="email">E-mail</label>
+                    <input formControlName="email" class="classic-input" type="email" name="email" id="email" />
+                </div>
+                <button (click)="saveUserInfo()" class="classic-btn save-btn">Save changes</button>
+            </form>
         </div>
     </div>
     <div class="actions">
