@@ -6,11 +6,11 @@ services:
     container_name: pb-analytics
     restart: unless-stopped
     labels:
-      - "traefik.http.routers.budgetanalytics-api-http.rule=Host(`api.ba.oscarprince.ch`)"
+      - "traefik.http.routers.budgetanalytics-api-http.rule=Host(`api.budgetanalytics.app`)"
       - "traefik.http.routers.budgetanalytics-api-http.middlewares=budgetanalytics-api-https"
       - "traefik.http.middlewares.budgetanalytics-api-https.redirectscheme.scheme=https"
       - "traefik.http.routers.budgetanalytics-api-http.entrypoints=web"
-      - "traefik.http.routers.budgetanalytics-api.rule=Host(`api.ba.oscarprince.ch`)"
+      - "traefik.http.routers.budgetanalytics-api.rule=Host(`api.budgetanalytics.app`)"
       - "traefik.http.services.budgetanalytics-api.loadbalancer.server.port=8044"
       - "traefik.http.routers.budgetanalytics-api.entrypoints=websecure"
       - "traefik.http.routers.budgetanalytics-api.tls.certresolver=zeusresolver"
@@ -26,11 +26,11 @@ services:
     container_name: front-analytics
     restart: unless-stopped
     labels:
-      - "traefik.http.routers.budgetanalytics-web-http.rule=Host(`ba.oscarprince.ch`)"
+      - "traefik.http.routers.budgetanalytics-web-http.rule=Host(`budgetanalytics.app`)"
       - "traefik.http.routers.budgetanalytics-web-http.middlewares=budgetanalytics-web-https"
       - "traefik.http.middlewares.budgetanalytics-web-https.redirectscheme.scheme=https"
       - "traefik.http.routers.budgetanalytics-web-http.entrypoints=web"
-      - "traefik.http.routers.budgetanalytics-web.rule=Host(`ba.oscarprince.ch`)"
+      - "traefik.http.routers.budgetanalytics-web.rule=Host(`budgetanalytics.app`)"
       - "traefik.http.services.budgetanalytics-web.loadbalancer.server.port=8045"
       - "traefik.http.routers.budgetanalytics-web.entrypoints=websecure"
       - "traefik.http.routers.budgetanalytics-web.tls.certresolver=zeusresolver"
