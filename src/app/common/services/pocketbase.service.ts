@@ -69,6 +69,10 @@ export class PocketbaseService {
         return from(this.pb.collection('users').requestEmailChange(newEmail));
     }
 
+    public changeAvatar(userId: string, avatar: File): Observable<AuthModel> {
+        return from(this.pb.collection('users').update(userId, { avatar }));
+    }
+
     // Transactions
 
     public getTransactions(

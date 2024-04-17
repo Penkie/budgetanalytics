@@ -21,6 +21,9 @@ export class SettingsComponent implements OnInit {
     username: new FormControl(this.user!['username'], Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(24)])),
     email: new FormControl(this.user!['email'], Validators.email)
   });
+  public avatarFieldGroup = new FormGroup({
+    avatar: new FormControl(null)
+  });
 
   constructor(
     private pb: PocketbaseService
@@ -42,6 +45,23 @@ export class SettingsComponent implements OnInit {
     // request new email if changed
     if (this.infoFields.controls.email.dirty) {
       this.pb.requestNewEmail(this.infoFields.controls.email.value);
+    }
+  }
+
+  public uploadAvatar(event: any): void {
+    const file: File = event.target.files[0];    
+    if (file) {
+      const formData = new FormData();
+      formData.append(file.name, file);
+      this.pb.changeAvatar(this.user!['id'], file)
+        .subscribe({
+          next: () => {
+            this.currentAvatarUrl = this.pb.getFiles(this.pb.getUser(), this.pb.getUser()?.['avatar'])
+          },
+          error: () => {
+            // display error
+          }
+        });
     }
   }
 }

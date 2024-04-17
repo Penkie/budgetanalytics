@@ -11,15 +11,23 @@
         .profile-picture {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
 
-            button {
+            label {
                 margin-top: 10px;
+                font-size: 14px !important;
             }
 
             .avatar {
                 width: 150px;
                 height: 150px;
                 border-radius: 50%;
+            }
+
+            input[type="file"] {
+                display: none;
             }
         }
 

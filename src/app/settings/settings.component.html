@@ -2,9 +2,10 @@
     <div class="user-info">
         <div class="profile-picture">
             <img class="avatar" [src]="currentAvatarUrl ? currentAvatarUrl : 'assets/avatar.svg'" alt="">
-            <button class="classic-btn upload">
-                Upload image
-            </button>
+            <div [formGroup]="avatarFieldGroup">
+                <label class="classic-btn" for="file-upload">Upload image</label>
+                <input formControlName="avatar" (change)="uploadAvatar($event)" id="file-upload"type="file" accept=".png, .jpg, .jpeg" class="upload">
+            </div>
         </div>
         <div class="inputs">
             <div class="title">
