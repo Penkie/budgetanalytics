@@ -7,7 +7,7 @@
             <img
                 width="35px"
                 height="35px"
-                src="assets/avatar.svg"
+                [src]="currentAvatarUrl ? currentAvatarUrl : 'assets/avatar.svg'"
                 alt="pp"
             />
         </button>
@@ -94,8 +94,8 @@
         </div>
         <div class="container">
             <div class="title">
-                You spent <span class="red">{{ totalSpent }} CHF</span> and
-                received <span class="green">{{ totalRevenue }} CHF</span>,
+                You spent <span class="red">{{ totalSpent | number }} CHF</span> and
+                received <span class="green">{{ totalRevenue | number }} CHF</span>,
                 making it a total of
                 <span
                     [ngClass]="totalRevenue + totalSpent < 0 ? 'red' : 'green'"

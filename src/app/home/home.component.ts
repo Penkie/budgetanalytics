@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     
     public userMenuOpen = false;
     public user: AuthModel = this.pbService.getUser();
+    public currentAvatarUrl: string = this.pbService.getFiles(this.pbService.getUser(), this.pbService.getUser()?.['avatar']);
 
     constructor(private pbService: PocketbaseService, private router: Router) {}
 
