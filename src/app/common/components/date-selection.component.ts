@@ -35,7 +35,7 @@ import { ClickOutsideDirective } from '../directive/clickoutside.directive';
                     @for (typeItem of types; track $index) {
                     <div
                         [class.selected]="type === typeItem"
-                        (mousedown)="type = typeItem; setValues()"
+                        (mousedown)="type = typeItem; valuesPosition = 0; setValues()"
                         class="item"
                     >
                         {{ typeItem }}
@@ -215,7 +215,6 @@ export class DateSelectionComponent {
 
     public setValues(): void {
         this.values.clear();
-        this.valuesPosition = 0;
 
         switch (this.type) {
             case RangeType.month:
