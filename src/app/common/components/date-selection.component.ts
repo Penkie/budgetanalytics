@@ -143,6 +143,7 @@ import { ClickOutsideDirective } from '../directive/clickoutside.directive';
                         cursor: pointer;
                         padding: 2px 5px;
                         border-radius: 8px;
+                        user-select: none;
 
                         &:not(:first-child) {
                             margin-left: 5px;
@@ -214,6 +215,7 @@ export class DateSelectionComponent {
 
     public setValues(): void {
         this.values.clear();
+        this.valuesPosition = 0;
 
         switch (this.type) {
             case RangeType.month:
