@@ -1,5 +1,8 @@
 <default-page goBackPathUrl="/" title="Settings">
     <div class="user-info">
+        <div class="title">
+            User informations
+        </div>
         <div class="profile-picture">
             <img class="avatar" [src]="currentAvatarUrl ? currentAvatarUrl : 'assets/avatar.svg'" alt="">
             <div [formGroup]="avatarFieldGroup">
@@ -8,10 +11,7 @@
             </div>
         </div>
         <div class="inputs">
-            <div class="title">
-                User informations
-            </div>
-            <form class="inputs" [formGroup]="infoFields">
+            <form class="inputs" [formGroup]="userInfoFieldGroup">
                 <div class="input">
                     <label class="classic-label" for="username">Username</label>
                     <input formControlName="username" class="classic-input" type="text" name="username" id="username" />
@@ -24,8 +24,14 @@
             </form>
         </div>
     </div>
+    <div class="settings">
+        <div class="title">Application</div>
+    </div>
     <div class="actions">
         <div class="title">Actions</div>
-        <button class="classic-btn delete-btn">Delete account</button>
+        <div class="buttons">
+            <button (click)="requestPasswordChange()" class="classic-btn">Request password change</button>
+            <button class="classic-btn delete-btn">Delete account</button>
+        </div>
     </div>
 </default-page>

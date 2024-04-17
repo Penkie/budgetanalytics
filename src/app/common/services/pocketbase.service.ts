@@ -73,6 +73,10 @@ export class PocketbaseService {
         return from(this.pb.collection('users').update(userId, { avatar }));
     }
 
+    public requestPasswordChange(email: string): Observable<boolean> {
+        return from(this.pb.collection('users').requestPasswordReset(email));
+    }
+
     // Transactions
 
     public getTransactions(

@@ -6,12 +6,13 @@
 
     .user-info {
         display: flex;
+        flex-direction: column;
         gap: 15px;
 
         .profile-picture {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            // flex-direction: column;
+            // justify-content: center;
             align-items: center;
             gap: 15px;
 
@@ -21,8 +22,8 @@
             }
 
             .avatar {
-                width: 150px;
-                height: 150px;
+                width: 75px;
+                height: 75px;
                 border-radius: 50%;
             }
 
@@ -46,9 +47,16 @@
 
     .actions {
         margin-top: 15px;
+        display: flex;
+        flex-direction: column;
         
         .title {
             margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 5px;
         }
 
         .delete-btn {
