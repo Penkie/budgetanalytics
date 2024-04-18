@@ -1,13 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { AppNotification } from '../models/notification';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
     selector: 'notification',
     standalone: true,
     imports: [CommonModule],
+    animations: [
+        trigger('smoothOpen', [
+            state('hidden', style({
+                transform: 'translateY(-100%)',
+                opacity: 0
+            })),
+            state('shown', style({
+                transform: 'translateY(0%)',
+                opacity: 1
+            })),
+            transition('hidden => shown', [
+                animate('0.1s')
+            ])
+        ])
+    ],
     template: `
-        <div [ngClass]="{
+        <div [@smoothOpen]="state" [ngClass]="{
                         success: notification.type === 0,
                         error: notification.type === 1,
                         info: notification.type === 2
@@ -45,8 +62,19 @@ import { AppNotification } from '../models/notification';
         }
     `,
 })
-export class NotificationComponent {
+export class NotificationComponent implements AfterViewInit, OnDestroy {
+
+    public state = 'hidden';
 
     @Input() public notification: AppNotification;
     
+    public ngAfterViewInit(): void {
+        setTimeout(() => {
+            this.state = 'shown';    
+        })
+    }
+
+    public ngOnDestroy(): void {
+        this.state = 'hidden';
+    }
 }
