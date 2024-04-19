@@ -38,7 +38,6 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    console.log(this.user);
   }
 
   public saveUserInfo(): void {

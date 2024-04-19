@@ -49,6 +49,8 @@ export class TransactionComponent implements OnInit {
 
     public loading = true;
 
+    public currency: string = this.pocketbaseService.getUserCurrency();
+
     constructor(
         private pocketbaseService: PocketbaseService,
         private router: Router,

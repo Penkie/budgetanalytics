@@ -42,8 +42,6 @@ export class HomeComponent implements OnInit {
     public optionPieChart: EChartsOption;
     public optionBarChart: EChartsOption;
 
-    public currency: string = 'CHF';
-
     public totalSpent = 0;
     public totalRevenue = 0;
 
@@ -51,6 +49,7 @@ export class HomeComponent implements OnInit {
     
     public userMenuOpen = false;
     public user: AuthModel = this.pbService.getUser();
+    public userCurrency = this.pbService.getUserCurrency();
     public currentAvatarUrl: string = this.pbService.getFiles(this.pbService.getUser(), this.pbService.getUser()?.['avatar']);
 
     constructor(private pbService: PocketbaseService, private router: Router) {}
@@ -74,7 +73,7 @@ export class HomeComponent implements OnInit {
             this.optionPieChart = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: `{c} ${this.currency} ({d}%)`,
+                    formatter: `{c} ${this.userCurrency} ({d}%)`,
                 },
                 series: [
                     {

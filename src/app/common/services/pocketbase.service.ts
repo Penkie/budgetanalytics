@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import PocketBase, {
     AuthModel,
-    ListResult,
-    RecordListOptions,
-    RecordModel,
+    RecordListOptions
 } from 'pocketbase';
 import { Transaction } from '../models/transaction.model';
 import { Observable, from, map, of, tap } from 'rxjs';
@@ -75,6 +73,10 @@ export class PocketbaseService {
 
     public requestPasswordChange(email: string): Observable<boolean> {
         return from(this.pb.collection('users').requestPasswordReset(email));
+    }
+
+    public getUserCurrency(): string {
+        return this.getUser()!['currency'] ? this.getUser()!['currency'] : 'CHF';
     }
 
     // Transactions

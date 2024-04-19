@@ -70,6 +70,7 @@
             <div class="wrapper">
                 <transaction-item
                     [transaction]="transaction"
+                    [currency]="userCurrency"
                 ></transaction-item>
             </div>
             @if ($index != transactions.length - 1) {
@@ -94,12 +95,12 @@
         </div>
         <div class="container">
             <div class="title">
-                You spent <span class="red">{{ totalSpent | number }} CHF</span> and
-                received <span class="green">{{ totalRevenue | number }} CHF</span>,
+                You spent <span class="red">{{ totalSpent | number }} {{ userCurrency }}</span> and
+                received <span class="green">{{ totalRevenue | number }} {{ userCurrency }}</span>,
                 making it a total of
                 <span
                     [ngClass]="totalRevenue + totalSpent < 0 ? 'red' : 'green'"
-                    >{{ round(totalRevenue + totalSpent) }} CHF</span
+                    >{{ round(totalRevenue + totalSpent) }} {{ userCurrency }}</span
                 >
             </div>
         </div>

@@ -9,7 +9,7 @@
         }
         
         <div class="wrapper">
-            <transaction-item [transaction]="item"></transaction-item>
+            <transaction-item [transaction]="item" [currency]="currency"></transaction-item>
         </div>
 
         @if (transactions[$index + 1] && checkIfDifferentMonthBetweenTwoDates(item.date, transactions[$index + 1].date)) {

@@ -4,6 +4,7 @@ import { PocketbaseService } from '../common/services/pocketbase.service';
 import { Transaction } from '../common/models/transaction.model';
 import { endOfMonth, format, getDate, startOfMonth, sub } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
+import { AuthModel } from 'pocketbase';
 
 @Component({
     selector: 'app-transactions',
@@ -16,6 +17,8 @@ export class TransactionsComponent implements OnInit {
     public transactions: Transaction[] = [];
     public loading = true;
     // TODO: handle paging
+
+    public currency: string = this.pbService.getUserCurrency();
 
     constructor(private pbService: PocketbaseService) {}
 
