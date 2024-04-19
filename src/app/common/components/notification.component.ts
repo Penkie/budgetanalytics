@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { AppNotification } from '../models/notification';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -11,7 +10,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     animations: [
         trigger('smoothOpen', [
             state('hidden', style({
-                transform: 'translateY(-100%)',
+                transform: 'translateY(100%)',
                 opacity: 0
             })),
             state('shown', style({
@@ -36,6 +35,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     `,
     styles: `
         :host {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+
             .notification {
                 padding: 15px;
                 border-radius: 0 0 8px 8px;
@@ -52,7 +55,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
             }
 
             .success {
-                background-color: #5cb85c2d;
+                background-color: #dfebd0;
                 color: #367136;
             }
 

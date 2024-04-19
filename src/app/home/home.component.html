@@ -3,14 +3,14 @@
         <date-selection (dateRange)="filterByDate($event)" />
     </div>
     <div (click)="userMenuOpen = !userMenuOpen" (clickOutside)="userMenuOpen = false" class="profile">
-        <button class="profile-btn">
+        <div class="profile-btn">
             <img
                 width="35px"
                 height="35px"
                 [src]="currentAvatarUrl ? currentAvatarUrl : 'assets/avatar.svg'"
                 alt="pp"
             />
-        </button>
+        </div>
         <span class="username">{{ user!['username'] }}</span>
 
         <img class="chevron" src="assets/icons/chevron_down.svg" alt="chevron_down" width="20px" height="20px">
