@@ -26,6 +26,11 @@ export class SettingsComponent implements OnInit {
   public avatarFieldGroup = new FormGroup({
     avatar: new FormControl(null)
   });
+  public appFields = new FormGroup({
+    currency: new FormControl(this.user!['currency'] ? this.user!['currency'] : 'CHF')
+  });
+
+  public currencyList = ['CHF', 'USD', '$', '€', 'EUR', '£', 'GBP', 'KYD', 'GIP', 'JOD']
 
   constructor(
     private pb: PocketbaseService,
@@ -43,12 +48,7 @@ export class SettingsComponent implements OnInit {
     }
 
     // save infos
-    this.pb.saveUser(this.user!['id'], this.userInfoFieldGroup.controls.username.value)
-      .subscribe({
-        next: () => {
-          this.notificationService.addNotification('Settings saved successfully', 2500, NotificationType.SUCCESS);
-        }
-      })
+    this.saveUser();
 
     // request new email if changed
     if (this.userInfoFieldGroup.controls.email.dirty) {
@@ -79,6 +79,10 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  public selectCurrency(): void {
+    this.saveUser();
+  }
+
   public requestPasswordChange(): void {
     this.pb.requestPasswordChange(this.user!['email'])
       .subscribe({
@@ -91,5 +95,14 @@ export class SettingsComponent implements OnInit {
           // display error
         }
       })
+  }
+
+  public saveUser(): void {
+    this.pb.saveUser(this.user!['id'], this.userInfoFieldGroup.controls.username.value, this.appFields.controls.currency.value)
+      .subscribe({
+        next: () => {
+          this.notificationService.addNotification('Settings saved successfully', 2500, NotificationType.SUCCESS);
+        }
+      });
   }
 }

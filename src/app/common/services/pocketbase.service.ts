@@ -61,8 +61,8 @@ export class PocketbaseService {
         return this.pb.authStore.clear();
     }
 
-    public saveUser(userId: string, username: string): Observable<AuthModel> {
-        return from(this.pb.collection('users').update(userId, { username }));
+    public saveUser(userId: string, username: string, currency: string): Observable<AuthModel> {
+        return from(this.pb.collection('users').update(userId, { username, currency }));
     }
 
     public requestNewEmail(newEmail: string): Observable<boolean> {

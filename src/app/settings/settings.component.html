@@ -24,8 +24,18 @@
             </form>
         </div>
     </div>
-    <div class="settings">
+    <div class="app-settings">
         <div class="title">Application</div>
+        <form [formGroup]="appFields">
+            <div class="item fit-content">
+                <label class="classic-label" for="currency">Display currency</label>
+                <select formControlName="currency" (change)="selectCurrency()" class="classic-input fit-content" name="currency" id="currency">
+                    @for (currency of currencyList; track $index) {
+                        <option [value]="currency">{{ currency }}</option>
+                    }
+                </select>
+            </div>
+        </form>
     </div>
     <div class="actions">
         <div class="title">Actions</div>
