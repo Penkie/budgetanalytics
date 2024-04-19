@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NotificationService } from './common/services/notification.service';
 import { NotificationComponent } from './common/components/notification.component';
-import { AppNotification, NotificationType } from './common/models/notification';
+import { AppNotification } from './common/models/notification';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +11,27 @@ import { AppNotification, NotificationType } from './common/models/notification'
     imports: [RouterOutlet, NotificationComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
+    animations: [
+        trigger('inOutAnimation',
+        [
+            transition(
+            ':enter', 
+            [
+                style({ transform: 'translateY(100%)', opacity: 0 }),
+                animate('0.1s ease-out', 
+                        style({ transform: 'translateY(0%)', opacity: 1 }))
+            ]
+            ),
+            transition(
+            ':leave', 
+            [
+                style({ transform: 'translateY(0%)', opacity: 1 }),
+                animate('0.1s ease-in', 
+                        style({ transform: 'translateY(100%)', opacity: 0 }))
+            ]
+            )
+        ])
+    ]
 })
 export class AppComponent implements OnInit {
 
