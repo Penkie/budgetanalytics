@@ -5,6 +5,7 @@ import { AuthModel } from 'pocketbase';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../common/services/notification.service';
 import { NotificationType } from '../common/models/notification';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -34,7 +35,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private pb: PocketbaseService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -101,6 +103,17 @@ export class SettingsComponent implements OnInit {
       .subscribe({
         next: () => {
           this.notificationService.addNotification('Settings saved successfully', 2500, NotificationType.SUCCESS);
+        }
+      });
+  }
+
+  public deleteAccount(): void {
+    this.pb.deleteUserAccount(this.user!['id'])
+      .subscribe({
+        next: () => {
+          this.pb.logoutUser();
+          this.router.navigate(['auth']);
+          this.notificationService.addNotification('Account deleted successfully', 5000, NotificationType.SUCCESS);
         }
       });
   }

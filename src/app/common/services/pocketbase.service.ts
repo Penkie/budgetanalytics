@@ -79,6 +79,10 @@ export class PocketbaseService {
         return this.getUser()!['currency'] ? this.getUser()!['currency'] : 'CHF';
     }
 
+    public deleteUserAccount(userId: string): Observable<boolean> {
+        return from(this.pb.collection('users').delete(userId));
+    }
+
     // Transactions
 
     public getTransactions(
