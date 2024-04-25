@@ -35,7 +35,8 @@ import { AppNotification } from '../models/notification';
             }
 
             .error {
-
+                background-color: #e04444;
+                color: white;
             }
 
             .success {

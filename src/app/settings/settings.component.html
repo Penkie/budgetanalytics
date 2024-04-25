@@ -15,12 +15,22 @@
                 <div class="input">
                     <label class="classic-label" for="username">Username</label>
                     <input formControlName="username" class="classic-input" type="text" name="username" id="username" />
+                    @if (userInfoFieldGroup.controls.username.invalid) {
+                    <span class="field-error">
+                        Invalid username (must be between 1 and 24 characters and must contain only a-z, A-Z and underscore)
+                    </span>
+                    }
                 </div>
                 <div class="input">
                     <label class="classic-label" for="email">E-mail</label>
                     <input formControlName="email" class="classic-input" type="email" name="email" id="email" />
+                    @if (userInfoFieldGroup.controls.email.invalid) {
+                        <span class="field-error">
+                            Invalid e-mail
+                        </span>
+                    }
                 </div>
-                <button (click)="saveUserInfo()" class="classic-btn save-btn">Save changes</button>
+                <button [disabled]="userInfoFieldGroup.invalid || userInfoFieldGroup.pristine" (click)="saveUserInfo()" class="classic-btn save-btn">Save changes</button>
             </form>
         </div>
     </div>

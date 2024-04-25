@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit {
 
   public submittedSave = false;
   public userInfoFieldGroup = new FormGroup({
-    username: new FormControl(this.user!['username'], Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(24)])),
+    username: new FormControl(this.user!['username'], Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(24), Validators.pattern('^[a-zA-Z0-9_]*$')])),
     email: new FormControl(this.user!['email'], Validators.email)
   });
   public avatarFieldGroup = new FormGroup({
@@ -57,6 +57,9 @@ export class SettingsComponent implements OnInit {
         .subscribe({
           next: () => {
             this.notificationService.addNotification('An e-mail was sent to change your e-mail', 5000, NotificationType.SUCCESS);
+          },
+          error: () => {
+            this.notificationService.addNotification('Something went wrong while requesting e-mail change', 5000, NotificationType.ERROR);
           }
         });
     }
@@ -75,6 +78,7 @@ export class SettingsComponent implements OnInit {
           },
           error: () => {
             // display error
+            this.notificationService.addNotification('Something went wrong while uploading image', 5000, NotificationType.ERROR);
           }
         });
     }
@@ -94,6 +98,7 @@ export class SettingsComponent implements OnInit {
         },
         error: () => {
           // display error
+          this.notificationService.addNotification('Something went wrong while requesting password change', 5000, NotificationType.ERROR);
         }
       })
   }
@@ -103,6 +108,9 @@ export class SettingsComponent implements OnInit {
       .subscribe({
         next: () => {
           this.notificationService.addNotification('Settings saved successfully', 2500, NotificationType.SUCCESS);
+        },
+        error: () => {
+          this.notificationService.addNotification('Something went wrong while saving data', 5000, NotificationType.ERROR);
         }
       });
   }
@@ -114,6 +122,9 @@ export class SettingsComponent implements OnInit {
           this.pb.logoutUser();
           this.router.navigate(['auth']);
           this.notificationService.addNotification('Account deleted successfully', 5000, NotificationType.SUCCESS);
+        },
+        error: () => {
+          this.notificationService.addNotification('Something went wrong while delete your account', 5000, NotificationType.ERROR);
         }
       });
   }
