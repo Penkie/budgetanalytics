@@ -103,31 +103,56 @@
                 flex-wrap: wrap;
                 gap: 5px;
 
-                category-item {
-                    border: 3px solid rgba(255, 255, 255, 0);
+                .category {
+                    display: flex;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
                     transition: 0.1s;
+                    cursor: pointer;
 
                     &:hover {
                         transform: scale(1.02);
                         opacity: 0.9;
                     }
 
-                    ::ng-deep.category {
-                        flex-direction: row;
-                        width: 150px;
-                        align-items: center;
-                        height: 40px;
-                        cursor: pointer;
+                    .bg-green {
+                    }
+                
+                    .check-status {
+                        min-width: 35px;
+                        background-color: white;
+                        border-radius: 8px 0 0 8px;
+                        position: relative;
 
-                        .icon {
-                            margin-right: 5px;
+                        .check {
+                            background-color: #2bd02b !important;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
                         }
                     }
-                }
+    
+                    category-item {
+    
+                        ::ng-deep.category {
+                            flex-direction: row;
+                            width: 150px;
+                            align-items: center;
+                            height: 40px;
+                            cursor: pointer;
 
-                .selected {
-                    border: 3px solid rgb(193, 193, 193);
-                    border-radius: 10px;
+                            border-radius: 0 8px 8px 0;
+    
+                            .icon {
+                                margin-right: 5px;
+                            }
+                        }
+                    }
                 }
             }
 
