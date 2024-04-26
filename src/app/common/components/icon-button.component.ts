@@ -25,7 +25,6 @@ import { RouterModule } from '@angular/router';
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-bottom: 5px;
 
                 &:hover {
                     background-color: rgba(128, 128, 128, 0.075);

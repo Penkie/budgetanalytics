@@ -8,14 +8,17 @@ import { IconButtonComponent } from './icon-button.component';
     standalone: true,
     imports: [CommonModule, RouterModule, IconButtonComponent],
     template: `
-        <div class="heading">
-            <span class="title">{{ title }}</span>
-        </div>
-        <div class="back-container">
-            <icon-button
-                iconName="arrow_back"
-                pathToUrl="{{ goBackPathUrl }}"
-            ></icon-button>
+        <div class="head-container">
+            <div class="back-container">
+                <icon-button
+                    iconName="arrow_back"
+                    pathToUrl="{{ goBackPathUrl }}"
+                ></icon-button>
+            </div>
+            <div class="heading">
+                <span class="title">{{ title }}</span>
+            </div>
+            <div></div>
         </div>
         <div class="box">
             <ng-content />
@@ -29,9 +32,16 @@ import { IconButtonComponent } from './icon-button.component';
             display: block;
             padding-bottom: 20px;
 
+            .head-container {
+                display: flex;
+                // justify-content: center;
+                align-items: center;
+                justify-content: space-between;
+            }
+
             .heading {
                 text-align: center;
-                margin: 25px 0;
+                margin: 30px 0;
 
                 .title {
                     font-family: "Sentient-Variable";
@@ -47,7 +57,14 @@ import { IconButtonComponent } from './icon-button.component';
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-bottom: 5px;
+
+                icon-button {
+                    ::ng-deep {
+                        .btn {
+                            margin-bottom: 0 !important;
+                        }
+                    }
+                }
 
                 &:hover {
                     background-color: rgba(128, 128, 128, 0.075);
