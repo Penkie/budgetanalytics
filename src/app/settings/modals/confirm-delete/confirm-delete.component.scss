@@ -1,0 +1,39 @@
+:host {
+    .wrapper {
+        background-color: white;
+        border-radius: 8px;
+        padding: 25px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    img {
+
+    }
+
+    .title {
+        font-size: larger;
+        text-align: center;
+        display: block;
+    }
+
+    p {
+        color: grey;
+        text-align: center;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: end;
+        gap: 5px;
+        width: 100%;
+    }
+
+    .red-btn {
+        background-color: #e04444;
+        color: white;
+    }
+}
