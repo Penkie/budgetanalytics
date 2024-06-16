@@ -7,6 +7,7 @@ import PocketBase, {
 import { Transaction } from '../models/transaction.model';
 import { Observable, from, map, of, tap } from 'rxjs';
 import { Category } from '../models/category';
+import { Account } from '../models/account.model';
 
 @Injectable({
     providedIn: 'root',
@@ -89,7 +90,7 @@ export class PocketbaseService {
         fromDate?: string,
         toDate?: string,
         page?: number,
-        perPage = 50
+        perPage = 1500
     ): Observable<Array<Transaction>> {
         // default params
         const pbParams: RecordListOptions = {
@@ -217,5 +218,11 @@ export class PocketbaseService {
 
     public deleteCategory(id: string): Observable<boolean> {
         return from(this.pb.collection('categories').delete(id));
+    }
+
+    // Accounts
+
+    public getAccounts(): Observable<Account[]> {
+        return from(this.pb.collection('accounts').getFullList<Account>());
     }
 }
