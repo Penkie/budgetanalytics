@@ -130,4 +130,28 @@
             </button>
         </div>
     </div>
+    <div class="accounts-box box">
+        <div class="heading">
+            <span class="title">Accounts</span>
+            <div class="actions">
+                <icon-button
+                    iconName="add"
+                    pathToUrl="/account"
+                ></icon-button>
+            </div>
+        </div>
+        <div class="accounts">
+            @for (account of accounts; track $index) {
+                <div class="account">
+                    <div class="name-and-icon">
+                        @if (account.type === 'bank') {
+                            <img src="assets/category_icons/banknote.fill.svg" alt="banknote">
+                        }
+                        {{ account.name }}
+                    </div>
+                    {{ account.amount }}
+                </div>
+            }
+        </div>
+    </div>
 </div>

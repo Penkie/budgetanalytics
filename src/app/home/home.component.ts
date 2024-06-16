@@ -15,6 +15,7 @@ import { DateSelectionComponent } from '../common/components/date-selection.comp
 import { DateRange } from '../common/models/date-range';
 import { ClickOutsideDirective } from '../common/directive/clickoutside.directive';
 import { AuthModel } from 'pocketbase';
+import { Account } from '../common/models/account.model';
 
 @Component({
     selector: 'app-home',
@@ -37,6 +38,8 @@ export class HomeComponent implements OnInit {
     public transactions: Transaction[] = [];
     public categories: Observable<Category[]>;
 
+    public accounts: Account[] = [];
+
     public month = new Date().toLocaleDateString('default', { month: 'long' });
 
     public optionPieChart: EChartsOption;
@@ -56,6 +59,13 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit(): void {
         this.categories = this.pbService.getCategories();
+
+        this.pbService.getAccounts()
+            .subscribe({
+                next: (accounts: Account[]) => {
+                    this.accounts = accounts;
+                }
+            })
     }
 
     public filterByDate(range: DateRange): void {

@@ -146,9 +146,12 @@
         .last-transactions {
             max-height: 350px;
             overflow-y: auto;
+            padding-top: 10px;
 
             .wrapper {
-                padding: 10px;
+                ::ng-deep.transaction {
+                    border-radius: 0;
+                }
             }
 
             .seperation {
@@ -205,6 +208,12 @@
                     font-size: 24px;
                 }
             }
+        }
+    }
+
+    .accounts-box {
+        .accounts {
+            
         }
     }
 }
