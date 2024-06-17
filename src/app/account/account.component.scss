@@ -1,0 +1,91 @@
+:host {
+    default-page {
+        .category-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            label {
+                font-family: "Sentient-Variable";
+                margin-bottom: 5px;
+            }
+
+            .input-wrapper {
+                display: flex;
+                gap: 10px;
+            }
+
+            .field {
+                display: flex;
+                flex-direction: column;
+
+                .select {
+                    background-color: white;
+                }
+            }
+
+            .name {
+                width: 100%;
+            }
+
+            .icons-container {
+                display: flex;
+                flex-direction: column;
+
+                .icons {
+                    display: flex;
+                    flex-wrap: wrap;
+                    font-size: 24px;
+                    gap: 5px;
+
+                    .icon {
+                        cursor: pointer;
+                        border-radius: 50%;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        justify-content: center;
+                        border: 2px solid rgba(255, 0, 0, 0);
+                        background-color: rgb(205, 205, 205);
+                        align-items: center;
+                    }
+
+                    .selected-icon {
+                        border: 2px solid rgb(188, 188, 188);
+                    }
+                }
+            }
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                all: unset;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                width: fit-content;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                img {
+                    margin-right: 5px;
+                }
+
+                &:not(:first-child) {
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .delete {
+            background-color: rgb(224, 68, 68) !important;
+            color: white !important;
+        }
+    }
+}

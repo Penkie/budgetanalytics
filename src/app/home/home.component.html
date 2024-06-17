@@ -142,14 +142,12 @@
         </div>
         <div class="accounts">
             @for (account of accounts; track $index) {
-                <div class="account">
+                <div routerLink="/account/{{ account.id }}" class="account">
                     <div class="name-and-icon">
-                        @if (account.type === 'bank') {
-                            <img src="assets/category_icons/banknote.fill.svg" alt="banknote">
-                        }
+                        <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="icon">
                         {{ account.name }}
                     </div>
-                    {{ account.amount }}
+                    {{ account.amount }} {{ userCurrency }}
                 </div>
             }
         </div>

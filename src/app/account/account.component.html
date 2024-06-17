@@ -1,0 +1,66 @@
+<default-page [title]="editionMode ? 'Edit account' : 'Create account'" goBackPathUrl="/">
+    <form
+        (submit)="editionMode ? editAccount() : createAccount()"
+        class="category-form"
+    >
+        <div class="input-wrapper">
+            <div class="name field">
+                <label for="name">Name</label>
+                <input
+                    autofocus
+                    [(ngModel)]="name"
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="classic-input"
+                />
+            </div>
+            <div class="amount field">
+                <label for="amount">Current amount</label>
+                <input
+                    autofocus
+                    [(ngModel)]="amount"
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    class="classic-input"
+                />
+            </div>
+        </div>
+        <div class="type field">
+            <label for="type">Type</label>
+            <select [(ngModel)]="type" class="classic-input select" name="type" id="type">
+                <option value="Current account">Current account</option>
+                <option value="Savings account">Savings account</option>
+                <option value="Credit card">Credit card</option>
+            </select>
+        </div>
+        <div class="icons-container">
+            <label>Icon</label>
+            <div class="icons">
+                @for (icon of availableIcons; track $index) {
+                <div
+                    (click)="this.selectedIcon = icon"
+                    [ngClass]="icon === selectedIcon ? 'selected-icon' : ''"
+                    class="icon"
+                >
+                    <img
+                        width="20"
+                        src="assets/category_icons/{{ icon }}.fill.svg"
+                        alt="{{ icon }}"
+                    />
+                </div>
+                }
+            </div>
+        </div>
+        <div class="actions">
+            <button type="submit" class="submit">Save</button>
+            @if (editionMode) {
+            <button (click)="deleteAccount()" class="delete">
+                <img width="20" src="assets/icons/delete.svg" alt="delete" />
+                Delete
+            </button>
+            }
+        </div>
+    </form>
+</default-page>
