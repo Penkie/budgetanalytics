@@ -3,6 +3,7 @@ export interface Account {
     name: string;
     amount: number;
     type: string;
+    icon: string;
 
     // pb specific
     collectionId?: string;

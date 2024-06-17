@@ -225,4 +225,40 @@ export class PocketbaseService {
     public getAccounts(): Observable<Account[]> {
         return from(this.pb.collection('accounts').getFullList<Account>());
     }
+
+    public getAccountById(id: string): Observable<Account> {
+        return from(this.pb.collection('accounts').getOne<Account>(id));
+    }
+
+    public createAccount(name: string, amount: number, type: string, icon: string): Observable<Account> {
+        // get user
+        const user = this.getUser();
+        if (user) {
+            return from(
+                this.pb
+                    .collection('accounts')
+                    .create<Account>({ name, amount, icon, type, user: user['id'] })
+            );
+        }
+
+        return of();
+    }
+
+    public editAccount(id: string, name: string, amount: number, type: string, icon: string): Observable<Account> {
+        // get user
+        const user = this.getUser();
+        if (user) {
+            return from(
+                this.pb
+                    .collection('accounts')
+                    .update<Account>(id, { name, amount, icon, type, user: user['id'] })
+            );
+        }
+
+        return of();
+    }
+
+    public deleteAccount(id: string): Observable<boolean> {
+        return from(this.pb.collection('accounts').delete(id));
+    }
 }

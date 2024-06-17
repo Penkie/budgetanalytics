@@ -7,6 +7,7 @@ import { CategoryComponent } from './category/category.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AccountComponent } from './account/account.component';
 
 export const routes: Routes = [
     {
@@ -46,6 +47,16 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: SettingsComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
+    },
+    {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [() => inject(PocketbaseService).canActivate()],
+    },
+    {
+        path: 'account/:id',
+        component: AccountComponent,
         canActivate: [() => inject(PocketbaseService).canActivate()],
     }
 ];
