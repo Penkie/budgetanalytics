@@ -140,16 +140,25 @@
                 ></icon-button>
             </div>
         </div>
+        <div class="net-worth">
+            <span class="title">Total net worth</span>
+            <span class="amount">{{ calculateTotalNetWorth() }} {{ userCurrency }}</span>
+        </div>
         <div class="accounts">
             @for (account of accounts; track $index) {
                 <div routerLink="/account/{{ account.id }}" class="account">
                     <div class="name-and-icon">
-                        <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="icon">
+                        <div class="icon">
+                            <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="icon">
+                        </div>
                         {{ account.name }}
                     </div>
-                    {{ account.amount }} {{ userCurrency }}
+                    <span>
+                        {{ account.amount }} {{ userCurrency }}
+                    </span>
                 </div>
             }
         </div>
+
     </div>
 </div>

@@ -174,6 +174,10 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    public calculateTotalNetWorth(): number {
+        return this.accounts.reduce((n, { amount }) => n + amount, 0);
+    }
+
     public round(value: number): number {
         return Math.round(value * 100) / 100;
     }

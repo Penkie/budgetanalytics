@@ -216,22 +216,52 @@
             .account {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 padding: 10px;
 
                 .name-and-icon {
                     display: flex;
                     justify-content: center;
+                    align-items: center;
                     gap: 5px;
-                    img {
-                        width: 20px;
-                        height: 20px;
+                    
+                    .icon {
+                        margin-right: 10px;
+                        width: 40px;
+                        height: 40px;
+                        padding: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: rgba(0, 0, 0, 0.040);
+                        border-radius: 50%;
                     }
+
                 }
 
                 &:hover {
                     cursor: pointer;
                     background-color: rgba(128, 128, 128, 0.075);
                 }
+            }
+
+        }
+
+        .net-worth {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+
+            .title {
+                font-size: large;
+                font-family: "Sentient-Variable";
+            }
+
+            .amount {
+                font-weight: bold;
+                font-size: 18px;
             }
         }
     }
