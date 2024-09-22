@@ -14,6 +14,7 @@ import { DefaultPageComponent } from '../common/components/default-page.componen
 import { filter, switchMap, tap } from 'rxjs';
 import { format } from 'date-fns';
 import { Transaction } from '../common/models/transaction.model';
+import { Account } from '../common/models/account.model';
 
 @Component({
     selector: 'app-transaction',
@@ -31,6 +32,7 @@ import { Transaction } from '../common/models/transaction.model';
 export class TransactionComponent implements OnInit {
     // what when how much
     public categories: Category[] = [];
+    public accounts: Account[] = [];
 
     public createTransactionForm = new FormGroup({
         description: new FormControl('', Validators.required),
@@ -39,6 +41,7 @@ export class TransactionComponent implements OnInit {
     });
 
     public selectedCategory: Category;
+    public selectedAccount: Account;
 
     public submitted = false;
 
@@ -65,6 +68,11 @@ export class TransactionComponent implements OnInit {
                 tap((categories) => {
                     this.selectedCategory = categories[0];
                     this.categories = categories;
+                }),
+                switchMap(() => this.pocketbaseService.getAccounts()),
+                tap((accounts) => {
+                    this.selectedAccount = accounts[0];
+                    this.accounts = accounts;
                 }),
                 filter(() => transactionId !== null),
                 tap(() => this.editionMode = true),
@@ -159,7 +167,7 @@ export class TransactionComponent implements OnInit {
 
         // negative the amount
         if (this.type === 'expense') {
-            newTransaction.amount = -newTransaction.amount;
+            newTransaction.amount *= -1;
         }
 
         this.pocketbaseService.createTransaction(newTransaction).subscribe({

@@ -48,7 +48,7 @@
                 display: block;
             }
 
-            input {
+            .text-input {
                 padding: 10px;
                 border-radius: 8px;
                 font-family: "Switzer-Variable";
@@ -61,15 +61,19 @@
 
             .form-group {
                 display: flex;
-                align-items: center;
+                align-items: stretch;
+                width: 100%;
 
                 .form-element {
                     margin-top: 0 !important;
 
                     &:not(:first-child) {
                         margin-left: 10px;
-                        width: 100%;
                     }
+                }
+
+                .description {
+                    flex-grow: 2;
                 }
 
                 .amount-container {
@@ -101,57 +105,45 @@
             .categories {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 5px;
+                gap: 10px;
+
+                .selected {
+                    border: 1px solid black;
+                }
 
                 .category {
                     display: flex;
+                    justify-content: center;
+                    align-items: center;
                     border-radius: 8px;
                     overflow: hidden;
-                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-                    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
                     transition: 0.1s;
                     cursor: pointer;
+                    padding: 5px;
+                    border: 1px solid rgba(0, 0, 0, 0);
+
+                    .icon {
+                        padding: 5px;
+                        margin-right: 5px;
+                        border-radius: 50%;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            width: 20px;
+                        }
+                    }
+
+                    input {
+                        font-size: default;
+                    }
 
                     &:hover {
                         transform: scale(1.02);
                         opacity: 0.9;
-                    }
-
-                    .bg-green {
-                    }
-                
-                    .check-status {
-                        min-width: 35px;
-                        background-color: white;
-                        border-radius: 8px 0 0 8px;
-                        position: relative;
-
-                        .check {
-                            background-color: #2bd02b !important;
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            position: absolute;
-                        }
-                    }
-    
-                    category-item {
-    
-                        ::ng-deep.category {
-                            flex-direction: row;
-                            width: 150px;
-                            align-items: center;
-                            height: 40px;
-                            cursor: pointer;
-
-                            border-radius: 0 8px 8px 0;
-    
-                            .icon {
-                                margin-right: 5px;
-                            }
-                        }
                     }
                 }
             }

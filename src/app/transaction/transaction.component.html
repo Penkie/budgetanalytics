@@ -19,7 +19,7 @@
         <form (submit)="editionMode ? edit() : save(true)" [formGroup]="createTransactionForm">
             <div class="form-group">
                 <div class="form-element">
-                    <label for="how-much">Amount</label>
+                    <label>Amount</label>
                     <div class="input-container amount-container">
                         <span class="currency">{{ currency }}</span>
                         <input
@@ -27,40 +27,43 @@
                             formControlName="amount"
                             type="number"
                             name="how-much"
+                            class="amount-input text-input"
                             id="how-much"
                         />
                     </div>
                 </div>
-                <div class="form-element">
-                    <label for="how-much">Description</label>
+                <div class="form-element description">
+                    <label>Description</label>
                     <div class="input-container">
                         <input
-                            class="description-input"
                             formControlName="description"
                             type="text"
                             name="what"
+                            class="text-input description-input"
                             id="what"
                         />
                     </div>
+                </div>
+                <div class="form-element">
+                    <label>Date</label>
+                    <input
+                        formControlName="date"
+                        type="date"
+                        name="date"
+                        class="text-input"
+                        id="date"
+                    />
                 </div>
             </div>
             <div class="form-element">
                 <label>Category</label>
                 <div class="categories">
                     @for (category of categories; track $index) {
-                    <div (click)="selectedCategory = category" class="category">
-                        <div class="check-status">
-                            @if (category === selectedCategory) {
-                                <div class="check">
-                                    <img width="20px" height="20px" src="assets/icons/simple_check.svg" alt="check">
-                                </div>
-                            }
+                    <div (click)="selectedCategory = category" [ngStyle]="selectedCategory == category ? { 'background-color': category.color + '7d', 'border': '1px solid ' + category.color } : {}" class="category">
+                        <div class="icon" [ngStyle]="{'background-color': category.color}">
+                            <img src="assets/category_icons/{{ category.icon }}.fill.svg" alt="">
                         </div>
-                        <category-item
-                            [name]="category.name"
-                            [icon]="category.icon"
-                            [color]="category.color"
-                        ></category-item>
+                        <span>{{ category.name }}</span>
                     </div>
                     }
                     @if (!loading && categories.length <= 0) {
@@ -69,13 +72,17 @@
                 </div>
             </div>
             <div class="form-element">
-                <label for="how-much">Date</label>
-                <input
-                    formControlName="date"
-                    type="date"
-                    name="date"
-                    id="date"
-                />
+                <label for="account">Account</label>
+                <div class="categories">
+                    @for (account of accounts; track $index) {
+                        <div (click)="selectedAccount = account" [ngStyle]="selectedAccount == account ? { 'background-color': '#6495ED' + '7d', 'border': '1px solid ' + '#6495ED' } : {}" class="category">
+                            <div class="icon">
+                                <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="">
+                            </div>
+                            <span>{{ account.name }}</span>
+                        </div>
+                    }
+                </div>
             </div>
             <div class="actions">
                 <div class="btn-wrapper">
