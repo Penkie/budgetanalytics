@@ -43,3 +43,5 @@ Thumbs.db
 
 # Custom
 /pb_local
+pocketbase/pocketbase
+pocketbase/pb_data
