@@ -177,7 +177,8 @@ export class TransactionComponent implements OnInit {
                     this.router.navigate(['']);
                 } else if (res) {
                     // success !
-                    this.createTransactionForm.reset();
+                    this.createTransactionForm.controls.amount.reset();
+                    this.createTransactionForm.controls.description.reset();
                 }
             },
             error: () => {
