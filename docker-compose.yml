@@ -3,42 +3,42 @@ services:
     build: ./pocketbase/.
     container_name: pb-analytics
     restart: unless-stopped
-    # labels:
-    #   - "traefik.http.routers.budgetanalytics-api-http.rule=Host(`api.budgetanalytics.app`)"
-    #   - "traefik.http.routers.budgetanalytics-api-http.middlewares=budgetanalytics-api-https"
-    #   - "traefik.http.middlewares.budgetanalytics-api-https.redirectscheme.scheme=https"
-    #   - "traefik.http.routers.budgetanalytics-api-http.entrypoints=web"
-    #   - "traefik.http.routers.budgetanalytics-api.rule=Host(`api.budgetanalytics.app`)"
-    #   - "traefik.http.services.budgetanalytics-api.loadbalancer.server.port=8044"
-    #   - "traefik.http.routers.budgetanalytics-api.entrypoints=websecure"
-    #   - "traefik.http.routers.budgetanalytics-api.tls.certresolver=zeusresolver"
-    #   - "traefik.http.routers.budgetanalytics-api.tls=true"
-    # networks:
-    #   - proxy
+    labels:
+      - "traefik.http.routers.budgetanalytics-api-http.rule=Host(`api.budgetanalytics.app`)"
+      - "traefik.http.routers.budgetanalytics-api-http.middlewares=budgetanalytics-api-https"
+      - "traefik.http.middlewares.budgetanalytics-api-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.budgetanalytics-api-http.entrypoints=web"
+      - "traefik.http.routers.budgetanalytics-api.rule=Host(`api.budgetanalytics.app`)"
+      - "traefik.http.services.budgetanalytics-api.loadbalancer.server.port=8044"
+      - "traefik.http.routers.budgetanalytics-api.entrypoints=websecure"
+      - "traefik.http.routers.budgetanalytics-api.tls.certresolver=zeusresolver"
+      - "traefik.http.routers.budgetanalytics-api.tls=true"
+    networks:
+      - proxy
     ports:
       - "8044:8044"
     volumes:
-      - /tmp:/pb_data
+      - /data:/pb_data
   front-analytics:
     build: .
     container_name: front-analytics
     restart: unless-stopped
-    # labels:
-    #   - "traefik.http.routers.budgetanalytics-web-http.rule=Host(`budgetanalytics.app`)"
-    #   - "traefik.http.routers.budgetanalytics-web-http.middlewares=budgetanalytics-web-https"
-    #   - "traefik.http.middlewares.budgetanalytics-web-https.redirectscheme.scheme=https"
-    #   - "traefik.http.routers.budgetanalytics-web-http.entrypoints=web"
-    #   - "traefik.http.routers.budgetanalytics-web.rule=Host(`budgetanalytics.app`)"
-    #   - "traefik.http.services.budgetanalytics-web.loadbalancer.server.port=8045"
-    #   - "traefik.http.routers.budgetanalytics-web.entrypoints=websecure"
-    #   - "traefik.http.routers.budgetanalytics-web.tls.certresolver=zeusresolver"
-    #   - "traefik.http.routers.budgetanalytics-web.tls=true"
-    # networks:
-    #   - proxy
+    labels:
+      - "traefik.http.routers.budgetanalytics-web-http.rule=Host(`budgetanalytics.app`)"
+      - "traefik.http.routers.budgetanalytics-web-http.middlewares=budgetanalytics-web-https"
+      - "traefik.http.middlewares.budgetanalytics-web-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.budgetanalytics-web-http.entrypoints=web"
+      - "traefik.http.routers.budgetanalytics-web.rule=Host(`budgetanalytics.app`)"
+      - "traefik.http.services.budgetanalytics-web.loadbalancer.server.port=8045"
+      - "traefik.http.routers.budgetanalytics-web.entrypoints=websecure"
+      - "traefik.http.routers.budgetanalytics-web.tls.certresolver=zeusresolver"
+      - "traefik.http.routers.budgetanalytics-web.tls=true"
+    networks:
+      - proxy
     ports:
       - "8045:8045"
 
-# networks:
-#   proxy:
-#     name: proxy
-#     external: true
+networks:
+  proxy:
+    name: proxy
+    external: true
