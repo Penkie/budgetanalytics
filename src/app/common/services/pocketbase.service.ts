@@ -8,15 +8,18 @@ import { Transaction } from '../models/transaction.model';
 import { Observable, from, map, of, tap } from 'rxjs';
 import { Category } from '../models/category';
 import { Account } from '../models/account.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PocketbaseService {
     // TODO: change to env variable
-    private pb = new PocketBase('https://api.budgetanalytics.app');
+    private pb = new PocketBase(environment.apiUrl);
+    private pbUrl = environment.apiUrl;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private http: HttpClient) {}
 
     // utils
 
@@ -129,19 +132,35 @@ export class PocketbaseService {
     public createTransaction(data: {
         description: string;
         amount: number;
-        category: string;
-        date: Date;
-        user?: string;
-    }): Observable<Transaction> {
+        categoryId: string;
+        accountId: string;
+        date: Date,
+        user?: string
+    }): Observable<{ message: string }> {
         const user = this.getUser();
         if (user) {
             data.user = user['id'];
-            return from(
-                this.pb.collection('transactions').create<Transaction>(data)
-            );
+            return this.http.post<{ message: string }>(`${this.pbUrl}/transaction`, data, { headers: { 'Authorization': this.getAuthToken() } });
         }
         return of();
     }
+
+    // public createTransaction(data: {
+    //     description: string;
+    //     amount: number;
+    //     category: string;
+    //     date: Date;
+    //     user?: string;
+    // }): Observable<Transaction> {
+    //     const user = this.getUser();
+    //     if (user) {
+    //         data.user = user['id'];
+    //         return from(
+    //             this.pb.collection('transactions').create<Transaction>(data)
+    //         );
+    //     }
+    //     return of();
+    // }
 
     public editTransaction(data: {
         id: string,
@@ -260,5 +279,10 @@ export class PocketbaseService {
 
     public deleteAccount(id: string): Observable<boolean> {
         return from(this.pb.collection('accounts').delete(id));
+    }
+
+    private getAuthToken(): string {
+        const obj: { token: string } = JSON.parse(localStorage.getItem('pocketbase_auth')!);
+        return obj.token;
     }
 }

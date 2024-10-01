@@ -162,7 +162,8 @@ export class TransactionComponent implements OnInit {
                 .value as string,
             amount: this.createTransactionForm.controls.amount.value as number,
             date: new Date(this.createTransactionForm.controls.date.value as string),
-            category: this.selectedCategory.id,
+            categoryId: this.selectedCategory.id,
+            accountId: this.selectedAccount.id
         };
 
         // negative the amount
@@ -172,9 +173,9 @@ export class TransactionComponent implements OnInit {
 
         this.pocketbaseService.createTransaction(newTransaction).subscribe({
             next: (res) => {
-                if (res.id && doesItReturn) {
+                if (res && doesItReturn) {
                     this.router.navigate(['']);
-                } else if (res.id) {
+                } else if (res) {
                     // success !
                     this.createTransactionForm.reset();
                 }
