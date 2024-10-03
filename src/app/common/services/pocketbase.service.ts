@@ -5,7 +5,7 @@ import PocketBase, {
     RecordListOptions
 } from 'pocketbase';
 import { Transaction } from '../models/transaction.model';
-import { Observable, from, map, of, tap } from 'rxjs';
+import { Observable, filter, from, map, of, tap } from 'rxjs';
 import { Category } from '../models/category';
 import { Account } from '../models/account.model';
 import { HttpClient } from '@angular/common/http';
@@ -93,6 +93,8 @@ export class PocketbaseService {
         fromDate?: string,
         toDate?: string,
         page?: number,
+        categoryId?: string,
+        accountId?: string,
         perPage = 1500
     ): Observable<Array<Transaction>> {
         // default params
@@ -104,8 +106,18 @@ export class PocketbaseService {
 
         // add params from method arguments
         if (fromDate && toDate) {
-            pbParams.filter = `date >= "${fromDate}" && date <= "${toDate}"`;
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `date >= "${fromDate}" && date <= "${toDate}"`);
         }
+
+        if (categoryId) {
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `category = "${categoryId}"`);
+        }
+
+        if (accountId) {
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `account = "${accountId}"`);
+        }
+
+        // debugger;
 
         if (page) {
             pbParams.page = page;
@@ -281,8 +293,18 @@ export class PocketbaseService {
         return from(this.pb.collection('accounts').delete(id));
     }
 
+    // ====== HELPERS ======
+
     private getAuthToken(): string {
         const obj: { token: string } = JSON.parse(localStorage.getItem('pocketbase_auth')!);
         return obj.token;
+    }
+
+    private addFilterParam(currentFilter: string, filterToAdd: string): string {
+        if (currentFilter != null && currentFilter != "") {
+            currentFilter += " && ";
+        }
+
+        return currentFilter += filterToAdd;
     }
 }

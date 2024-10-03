@@ -19,8 +19,14 @@
         } @else if ($index != transactions.length - 1) {
             <div class="seperation"></div>
         }
+
         }
     </div>
+    @if (!isCompleted) {
+        <div (click)="loadTransactions(true)" class="next classic-btn">
+            Load more
+        </div>
+    }
     @if(!loading && transactions.length <= 0) {
        <div class="small-text center-text padding-text">No transaction to display</div> 
     }

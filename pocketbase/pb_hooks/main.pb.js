@@ -39,7 +39,7 @@ routerAdd("POST", "/transaction", (c) => {
         "date": data.date,
         "user": userRecord.id,
         "category": category.get("id"),
-        "account": account.get("account")
+        "account": account.get("id")
     });
     form.submit();
 
