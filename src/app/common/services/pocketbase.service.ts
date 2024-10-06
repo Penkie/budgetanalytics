@@ -99,7 +99,7 @@ export class PocketbaseService {
     ): Observable<Array<Transaction>> {
         // default params
         const pbParams: RecordListOptions = {
-            expand: 'category',
+            expand: 'category, account',
             sort: '-date',
             perPage,
         };
@@ -117,8 +117,6 @@ export class PocketbaseService {
             pbParams.filter = this.addFilterParam(pbParams.filter || "", `account = "${accountId}"`);
         }
 
-        // debugger;
-
         if (page) {
             pbParams.page = page;
         }
@@ -131,7 +129,7 @@ export class PocketbaseService {
             map((list) => list.items),
             tap((items) => {
                 // TODO: remove !
-                items.map((item) => (item.category = item.expand!['category']));
+                items.map((item) => (item.category = item.expand!['category']) && (item.account = item.expand!['account']));
                 return items;
             })
         );

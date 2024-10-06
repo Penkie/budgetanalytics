@@ -13,24 +13,32 @@ import { Transaction } from '../models/transaction.model';
                 <div
                     class="icon"
                     [ngStyle]="{
-                        'background-color': transaction.category.color
+                        'background-color': transaction.category?.color
                     }"
                 >
                     <img
                         width="20"
                         src="assets/category_icons/{{
-                            transaction.category.icon
+                            transaction.category?.icon
                         }}.fill.svg"
-                        alt="{{ transaction.category.icon }}"
+                        alt="{{ transaction.category?.icon }}"
                     />
                 </div>
                 <div class="what">
                     <span class="description">{{
                         transaction.description
                     }}</span>
-                    <span class="type-name">{{
-                        transaction.category.name
-                    }}</span>
+                    <div class="metadata">
+                        <span class="type-name">{{
+                            transaction.category?.name
+                        }}</span>
+                        @if (transaction.category && transaction.account) {
+                            <div class="separator"></div>
+                        }
+                        <span class="type-name account">
+                            {{ transaction.account?.name }}
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="amount-and-date">
@@ -79,9 +87,23 @@ import { Transaction } from '../models/transaction.model';
                         display: flex;
                         flex-direction: column;
 
-                        .type-name {
+                        .metadata {
                             font-size: 12px;
+                            display: flex;
                             color: grey;
+                            align-items: center;
+
+                            .account {
+                                // font-weight: bold;
+                            }
+
+                            .separator {
+                                width: 3px;
+                                height: 3px;
+                                background-color: grey;
+                                border-radius: 50%;
+                                margin: 0 5px;
+                            }
                         }
 
                         span {

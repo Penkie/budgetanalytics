@@ -1,7 +1,9 @@
+import { Account } from './account.model';
 import { Category } from './category';
 
 export interface Transaction {
-    category: Category;
+    category?: Category;
+    account?: Account;
     amount: number;
     description: string;
     date: Date;

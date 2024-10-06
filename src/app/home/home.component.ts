@@ -139,9 +139,9 @@ export class HomeComponent implements OnInit {
         }> = [];
 
         this.transactions.forEach((transaction) => {
-            if (transaction.amount < 0) {
+            if (transaction.amount < 0 && transaction.category) {
                 const findTypeInData = data.find(
-                    (e) => e.name === transaction.category.name
+                    (e) => e.name === transaction.category?.name
                 );
                 if (findTypeInData) {
                     findTypeInData.value += transaction.amount;
