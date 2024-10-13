@@ -142,35 +142,20 @@ export class PocketbaseService {
     public createTransaction(data: {
         description: string;
         amount: number;
-        categoryId: string;
-        accountId: string;
-        date: Date,
-        user?: string
-    }): Observable<{ message: string }> {
+        category: string;
+        account: string;
+        date: Date;
+        user?: string;
+    }): Observable<Transaction> {
         const user = this.getUser();
         if (user) {
             data.user = user['id'];
-            return this.http.post<{ message: string }>(`${this.pbUrl}/transaction`, data, { headers: { 'Authorization': this.getAuthToken() } });
+            return from(
+                this.pb.collection('transactions').create<Transaction>(data)
+            );
         }
         return of();
     }
-
-    // public createTransaction(data: {
-    //     description: string;
-    //     amount: number;
-    //     category: string;
-    //     date: Date;
-    //     user?: string;
-    // }): Observable<Transaction> {
-    //     const user = this.getUser();
-    //     if (user) {
-    //         data.user = user['id'];
-    //         return from(
-    //             this.pb.collection('transactions').create<Transaction>(data)
-    //         );
-    //     }
-    //     return of();
-    // }
 
     public editTransaction(data: {
         id: string,

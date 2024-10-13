@@ -162,8 +162,8 @@ export class TransactionComponent implements OnInit {
                 .value as string,
             amount: this.createTransactionForm.controls.amount.value as number,
             date: new Date(this.createTransactionForm.controls.date.value as string),
-            categoryId: this.selectedCategory.id,
-            accountId: this.selectedAccount.id
+            category: this.selectedCategory.id,
+            account: this.selectedAccount.id
         };
 
         // negative the amount
