@@ -82,9 +82,14 @@ export class TransactionComponent implements OnInit {
                 next: (transaction) => {
                     // TODO : refector this
                     this.editingTransaction = transaction;
-                    const selectedCategoryObj = this.categories.find((e) => e.id === transaction.category as unknown as string);
+                    const selectedCategoryObj = this.categories.find((e) => e.id === transaction.category as unknown);
                     if (selectedCategoryObj) {
                         this.selectedCategory = selectedCategoryObj;
+                    }
+
+                    const account = this.accounts.find((account) => account.id === transaction.account as unknown);
+                    if (account) {
+                        this.selectedAccount = account;
                     }
 
                     // set type (expense/income)
@@ -119,6 +124,7 @@ export class TransactionComponent implements OnInit {
             amount: this.createTransactionForm.controls.amount.value as number,
             date: new Date(this.createTransactionForm.controls.date.value as string),
             category: this.selectedCategory.id,
+            account: this.selectedAccount.id
         }
 
         // negative the amount

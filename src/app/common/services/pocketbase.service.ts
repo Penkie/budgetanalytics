@@ -162,6 +162,7 @@ export class PocketbaseService {
         description: string;
         amount: number;
         category: string;
+        account: string;
         date: Date;
         user?: string;
     }): Observable<Transaction> {
