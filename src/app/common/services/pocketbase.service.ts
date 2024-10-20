@@ -129,7 +129,8 @@ export class PocketbaseService {
             map((list) => list.items),
             tap((items) => {
                 // TODO: remove !
-                items.map((item) => (item.category = item.expand!['category']) && (item.account = item.expand!['account']));
+                items.map((item) => (item.category = item.expand!['category']));
+                items.map((item) => (item.account = item.expand!['account']));
                 return items;
             })
         );
@@ -142,10 +143,11 @@ export class PocketbaseService {
     public createTransaction(data: {
         description: string;
         amount: number;
-        category: string;
+        category?: string;
         account: string;
         date: Date;
         user?: string;
+        hidden?: boolean;
     }): Observable<Transaction> {
         const user = this.getUser();
         if (user) {

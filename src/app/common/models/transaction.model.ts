@@ -8,6 +8,7 @@ export interface Transaction {
     description: string;
     date: Date;
     id: string;
+    hidden?: boolean;
 
     // pb specific
     collectionId?: string;

@@ -2,14 +2,21 @@
     <div class="types">
         <div
             (click)="type = 'expense'"
-            [ngClass]="type === 'expense' ? '' : 'unselected-left'"
+            [ngClass]="{'unselected-left': type !== 'expense', 'border-radius-left': type === 'transfert'}"
             class="type"
         >
             Expense
         </div>
         <div
+            (click)="type = 'transfert'"
+            [ngClass]="{'middle-left': type === 'expense', 'middle-right': type === 'income'}"
+            class="type"
+        >
+            Transfert
+        </div>
+        <div
             (click)="type = 'income'"
-            [ngClass]="type === 'income' ? '' : 'unselected-right'"
+            [ngClass]="{'unselected-right': type !== 'income', 'border-radius-right': type === 'transfert'}"
             class="type"
         >
             Income
@@ -55,35 +62,54 @@
                     />
                 </div>
             </div>
-            <div class="form-element">
-                <label>Category</label>
-                <div class="categories">
-                    @for (category of categories; track $index) {
-                    <div (click)="selectedCategory = category" [ngStyle]="selectedCategory == category ? { 'background-color': category.color + '7d', 'border': '1px solid ' + category.color } : {}" class="category">
-                        <div class="icon" [ngStyle]="{'background-color': category.color}">
-                            <img src="assets/category_icons/{{ category.icon }}.fill.svg" alt="">
-                        </div>
-                        <span>{{ category.name }}</span>
-                    </div>
-                    }
-                    @if (!loading && categories.length <= 0) {
-                        <div class="small-text">You have no categories created yet. <span routerLink="/category" class="link-text">You need to create one</span> in order to add a transaction.</div>
-                    }
-                </div>
-            </div>
-            <div class="form-element">
-                <label for="account">Account</label>
-                <div class="categories">
-                    @for (account of accounts; track $index) {
-                        <div (click)="selectedAccount = account" [ngStyle]="selectedAccount == account ? { 'background-color': '#6495ED' + '7d', 'border': '1px solid ' + '#6495ED' } : {}" class="category">
-                            <div class="icon">
-                                <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="">
+            @if (type !== 'transfert') {
+                <div class="form-element">
+                    <label>Category</label>
+                    <div class="categories">
+                        @for (category of categories; track $index) {
+                        <div (click)="selectedCategory = category" [ngStyle]="selectedCategory == category ? { 'background-color': category.color + '7d', 'border': '1px solid ' + category.color } : {}" class="category">
+                            <div class="icon" [ngStyle]="{'background-color': category.color}">
+                                <img src="assets/category_icons/{{ category.icon }}.fill.svg" alt="">
                             </div>
-                            <span>{{ account.name }}</span>
+                            <span>{{ category.name }}</span>
                         </div>
-                    }
+                        }
+                        @if (!loading && categories.length <= 0) {
+                            <div class="small-text">You have no categories created yet. <span routerLink="/category" class="link-text">You need to create one</span> in order to add a transaction.</div>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
+            @if (type != 'transfert' || (type == 'transfert' && (editionMode ? !selectedToAccount : true))) {
+                <div class="form-element">
+                    <label for="account">{{ type === 'transfert' ? 'From' : 'Account'}}</label>
+                    <div class="categories">
+                        @for (account of accounts; track $index) {
+                            <div (click)="selectedAccount = account" [ngStyle]="selectedAccount == account ? { 'background-color': '#6495ED' + '7d', 'border': '1px solid ' + '#6495ED' } : {}" class="category">
+                                <div class="icon">
+                                    <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="">
+                                </div>
+                                <span>{{ account.name }}</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @if (type == 'transfert' && (editionMode ? !selectedAccount : true)) {
+                <div class="form-element">
+                    <label for="account">To</label>
+                    <div class="categories">
+                        @for (account of accounts; track $index) {
+                            <div (click)="selectedToAccount = account" [ngStyle]="selectedToAccount == account ? { 'background-color': '#6495ED' + '7d', 'border': '1px solid ' + '#6495ED' } : {}" class="category">
+                                <div class="icon">
+                                    <img src="assets/category_icons/{{ account.icon }}.fill.svg" alt="">
+                                </div>
+                                <span>{{ account.name }}</span>
+                            </div>
+                        }
+                    </div>
+                </div>  
+            }
             <div class="actions">
                 <div class="btn-wrapper">
                     <button class="main-btn" class="main-btn" type="submit">

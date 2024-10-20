@@ -15,6 +15,8 @@ import { filter, switchMap, tap } from 'rxjs';
 import { format } from 'date-fns';
 import { Transaction } from '../common/models/transaction.model';
 import { Account } from '../common/models/account.model';
+import { NotificationService } from '../common/services/notification.service';
+import { NotificationType } from '../common/models/notification';
 
 @Component({
     selector: 'app-transaction',
@@ -42,10 +44,11 @@ export class TransactionComponent implements OnInit {
 
     public selectedCategory: Category;
     public selectedAccount: Account;
+    public selectedToAccount: Account;
 
     public submitted = false;
 
-    public type: 'expense' | 'income' = 'expense';
+    public type: 'expense' | 'income' | 'transfert' = 'expense';
 
     public editionMode = false;
     public editingTransaction: Transaction;
@@ -54,10 +57,13 @@ export class TransactionComponent implements OnInit {
 
     public currency: string = this.pocketbaseService.getUserCurrency();
 
+    public transactionAmount?: number;
+
     constructor(
         private pocketbaseService: PocketbaseService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private notificationService: NotificationService
     ) {}
 
     public ngOnInit(): void {
@@ -71,7 +77,6 @@ export class TransactionComponent implements OnInit {
                 }),
                 switchMap(() => this.pocketbaseService.getAccounts()),
                 tap((accounts) => {
-                    this.selectedAccount = accounts[0];
                     this.accounts = accounts;
                 }),
                 filter(() => transactionId !== null),
@@ -87,14 +92,26 @@ export class TransactionComponent implements OnInit {
                         this.selectedCategory = selectedCategoryObj;
                     }
 
-                    const account = this.accounts.find((account) => account.id === transaction.account as unknown);
-                    if (account) {
-                        this.selectedAccount = account;
-                    }
-
                     // set type (expense/income)
                     if (transaction.amount > 0) {
                         this.type = 'income';
+                    }
+
+                    if (!transaction.category) {
+                        this.type = 'transfert';
+                    }
+
+                    const account = this.accounts.find((account) => account.id === transaction.account as unknown);
+                    if (account) {
+                        /**
+                         * if transaction type is transfert, select account based on the transaction amount. If it's positive,
+                         * it should go to the selectedToAccount instead of the selectedAccount (representing where the money left)
+                         */
+                        if (this.type === 'transfert' && transaction.amount > 0) {
+                            this.selectedToAccount = account;
+                        } else {
+                            this.selectedAccount = account;
+                        }
                     }
                     
                     this.createTransactionForm.controls.amount.setValue(Math.abs(transaction.amount));
@@ -157,6 +174,11 @@ export class TransactionComponent implements OnInit {
     }
 
     public save(doesItReturn: boolean): void {
+        if (this.type === 'transfert') {
+            this.saveTransfert(doesItReturn);
+            return;
+        }
+
         this.submitted = true;
 
         if (this.createTransactionForm.invalid) {
@@ -191,5 +213,53 @@ export class TransactionComponent implements OnInit {
                 // handle error
             },
         });
+    }
+
+    public saveTransfert(doesItReturn: boolean): void {
+        this.submitted = true;
+
+        if (!this.selectedAccount || !this.selectedToAccount) {
+            return;
+        }
+
+        const toTransaction = {
+            description: this.createTransactionForm.controls.description.value as string,
+            amount: this.createTransactionForm.controls.amount.value as number,
+            date: new Date(this.createTransactionForm.controls.date.value as string),
+            account: this.selectedToAccount.id,
+            hidden: true
+        }
+
+        const fromTransaction = {
+            description: this.createTransactionForm.controls.description.value as string,
+            amount: this.createTransactionForm.controls.amount.value as number,
+            // category: '',
+            date: new Date(this.createTransactionForm.controls.date.value as string),
+            account: this.selectedAccount.id,
+            hidden: true
+        }
+        fromTransaction.amount *= -1;
+
+        // save two transactions
+        this.pocketbaseService.createTransaction(fromTransaction).pipe(
+            switchMap(() => this.pocketbaseService.createTransaction(toTransaction))
+        ).subscribe({
+            next: (res) => {
+                if (res && doesItReturn) {
+                    this.router.navigate(['']);
+                } else if (res) {
+                    // success !
+                    this.createTransactionForm.controls.amount.reset();
+                    this.createTransactionForm.controls.description.reset();
+                }
+            },
+            error: () => {
+                this.notificationService.addNotification('Something went wrong...', 5000, NotificationType.ERROR);
+            }
+        });
+    }
+
+    public get getRealAmount(): number {
+        return this.createTransactionForm.controls.amount.value || 0;
     }
 }

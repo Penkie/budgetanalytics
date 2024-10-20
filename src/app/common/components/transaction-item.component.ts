@@ -13,7 +13,7 @@ import { Transaction } from '../models/transaction.model';
                 <div
                     class="icon"
                     [ngStyle]="{
-                        'background-color': transaction.category?.color
+                        'background-color': transaction.category?.color || 'grey'
                     }"
                 >
                     <img
@@ -23,6 +23,13 @@ import { Transaction } from '../models/transaction.model';
                         }}.fill.svg"
                         alt="{{ transaction.category?.icon }}"
                     />
+                    @if (!transaction.category) {
+                        <img
+                            width="20"
+                            src="assets/icons/transfert.svg"
+                            class="transfert-icon"
+                            alt="transfert">
+                    }
                 </div>
                 <div class="what">
                     <span class="description">{{

@@ -139,7 +139,7 @@ export class HomeComponent implements OnInit {
         }> = [];
 
         this.transactions.forEach((transaction) => {
-            if (transaction.amount < 0 && transaction.category) {
+            if (transaction.amount < 0 && transaction.category && !transaction.hidden) {
                 const findTypeInData = data.find(
                     (e) => e.name === transaction.category?.name
                 );
@@ -166,6 +166,10 @@ export class HomeComponent implements OnInit {
 
     public calculateTotals(): void {
         this.transactions.forEach((transaction) => {
+            if (transaction.hidden) {
+                return;
+            }
+
             if (transaction.amount < 0) {
                 this.totalSpent += transaction.amount;
             } else {
