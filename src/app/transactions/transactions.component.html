@@ -1,4 +1,8 @@
 <default-page title="All transactions" goBackPathUrl="/">
+    <div top-section>
+        <app-filter></app-filter>
+    </div>
+
     <div class="transactions">
         @for (item of transactions; track $index) {
 

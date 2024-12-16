@@ -5,11 +5,12 @@ import { Transaction } from '../common/models/transaction.model';
 import { format } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
 import { ActivatedRoute } from '@angular/router';
+import { FilterComponent } from "./components/filter/filter.component";
 
 @Component({
     selector: 'app-transactions',
     standalone: true,
-    imports: [DefaultPageComponent, TransactionItemComponent],
+    imports: [DefaultPageComponent, TransactionItemComponent, FilterComponent],
     templateUrl: './transactions.component.html',
     styleUrl: './transactions.component.scss',
 })

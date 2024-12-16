@@ -20,6 +20,9 @@ import { IconButtonComponent } from './icon-button.component';
             </div>
             <div></div>
         </div>
+        <div class="top">
+            <ng-content select="[top-section]" />
+        </div>
         <div class="box">
             <ng-content />
         </div>
