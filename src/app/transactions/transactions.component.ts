@@ -23,6 +23,11 @@ export class TransactionsComponent implements OnInit {
 
     public currency: string = this.pbService.getUserCurrency();
 
+    public categoryId: string | null;
+    public accountId: string | null;
+    public amount: number | null;
+    public greaterOrLessThan: '>' | '<';
+
     constructor(private pbService: PocketbaseService, private route: ActivatedRoute) {}
 
     public ngOnInit(): void {
@@ -30,14 +35,16 @@ export class TransactionsComponent implements OnInit {
     }
 
     public loadTransactions(next?: boolean): void {
-        const categoryId = this.route.snapshot.queryParamMap.get('categoryId');
-        const accountId = this.route.snapshot.queryParamMap.get('accountId');
+        this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
+        this.accountId = this.route.snapshot.queryParamMap.get('accountId');
+        this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
+        this.greaterOrLessThan = this.route.snapshot.queryParamMap.get('greaterOrLessThan') as '>' | '<'; // TODO: refactor
 
         if (next) {
             this.currentPage += 1;
         }
 
-        this.pbService.getTransactions(undefined, undefined, this.currentPage, categoryId || undefined, accountId || undefined, this.perPage).subscribe({
+        this.pbService.getTransactions(undefined, undefined, this.currentPage, this.categoryId || undefined, this.accountId || undefined, undefined, undefined, this.perPage).subscribe({
             next: (transactions) => {
                 this.transactions = this.transactions.concat(transactions);
                 this.loading = false;

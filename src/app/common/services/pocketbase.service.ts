@@ -95,6 +95,8 @@ export class PocketbaseService {
         page?: number,
         categoryId?: string,
         accountId?: string,
+        amount?: number,
+        greaterOrLessThan?: '>' | '<',
         perPage = 1500
     ): Observable<Array<Transaction>> {
         // default params
@@ -115,6 +117,10 @@ export class PocketbaseService {
 
         if (accountId) {
             pbParams.filter = this.addFilterParam(pbParams.filter || "", `account = "${accountId}"`);
+        }
+
+        if (amount && greaterOrLessThan) {
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `amount ${greaterOrLessThan} ${amount}`);
         }
 
         if (page) {

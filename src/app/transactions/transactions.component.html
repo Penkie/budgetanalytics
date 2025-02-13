@@ -1,6 +1,6 @@
 <default-page title="All transactions" goBackPathUrl="/">
     <div top-section>
-        <app-filter></app-filter>
+        <app-filter [selectedCategory]="categoryId" [selectedAccount]="accountId" [amount]="amount" [greaterOrLessThan]="greaterOrLessThan"></app-filter>
     </div>
 
     <div class="transactions">
