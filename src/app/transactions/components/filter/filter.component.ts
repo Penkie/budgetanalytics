@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { PocketbaseService } from '../../../common/services/pocketbase.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,15 +23,18 @@ export class FilterComponent {
   public amount = input<number | null>();
   public greaterOrLessThan = input<'>' | '<'>();
 
-  // public selectedAccountChange = output<void>();
-
-  // @Output() selectedAccountChange = new EventEmitter<string | null>();
-  // @Output() selectedCategoryChange = new EventEmitter<string | null>();
-  // @Output() amountChange = new EventEmitter<number | null>();
-  // @Output() greaterOrLessThanChange = new EventEmitter<'>' | '<'>();
+  public selectedAccountChange = output<string | null>();
+  public selectedCategoryChange = output<string | null>();
+  public amountChange = output<number | null>();
+  public greaterOrLessThanChange = output<'>' | '<'>();
 
   constructor (
     private pb: PocketbaseService
   ) {}
+
+  onAccountChange(event: Event) {
+    const newValue = (event.target as HTMLSelectElement).value;
+    this.selectedAccountChange.emit(newValue);
+  }
 
 }

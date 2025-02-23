@@ -5,7 +5,10 @@
     <div class="content">
         <div class="filter">
             <span>Account</span>
-            <select name="account" id="account">
+            <select
+                [value]="selectedAccount()"
+                (change)="onAccountChange($event)"
+                name="account" id="account">
                 <option value=""></option>
                 @for (account of accounts$ | async; track $index) {
                     <option [selected]="selectedAccount() == account.id" [value]="account.id">{{ account.name }}</option>

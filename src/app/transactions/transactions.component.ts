@@ -4,7 +4,7 @@ import { PocketbaseService } from '../common/services/pocketbase.service';
 import { Transaction } from '../common/models/transaction.model';
 import { format } from 'date-fns';
 import { TransactionItemComponent } from '../common/components/transaction-item.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FilterComponent } from "./components/filter/filter.component";
 
 @Component({
@@ -28,17 +28,32 @@ export class TransactionsComponent implements OnInit {
     public amount: number | null;
     public greaterOrLessThan: '>' | '<';
 
-    constructor(private pbService: PocketbaseService, private route: ActivatedRoute) {}
+    constructor(private pbService: PocketbaseService, private route: ActivatedRoute, private router: Router) {}
 
     public ngOnInit(): void {
-       this.loadTransactions();
-    }
-
-    public loadTransactions(next?: boolean): void {
         this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
         this.accountId = this.route.snapshot.queryParamMap.get('accountId');
         this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
         this.greaterOrLessThan = this.route.snapshot.queryParamMap.get('greaterOrLessThan') as '>' | '<'; // TODO: refactor
+        this.loadTransactions();
+    }
+
+    public updateQueryParams(): void {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {
+                categoryId: this.categoryId,
+                accountId: this.accountId,
+                amount: this.amount,
+                greaterOrLessThan: this.greaterOrLessThan
+            },
+            queryParamsHandling: 'merge'
+        })
+    }
+
+    public loadTransactions(next?: boolean): void {
+        this.transactions = [];
+        this.updateQueryParams();
 
         if (next) {
             this.currentPage += 1;
