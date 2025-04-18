@@ -96,7 +96,7 @@ export class PocketbaseService {
         categoryId?: string,
         accountId?: string,
         amount?: number,
-        greaterOrLessThan?: '>' | '<',
+        greaterOrLessThan?: string,
         perPage = 1500
     ): Observable<Array<Transaction>> {
         // default params
@@ -109,6 +109,10 @@ export class PocketbaseService {
         // add params from method arguments
         if (fromDate && toDate) {
             pbParams.filter = this.addFilterParam(pbParams.filter || "", `date >= "${fromDate}" && date <= "${toDate}"`);
+        } else if (fromDate && !toDate) {
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `date >= "${fromDate}"`);
+        } else if (toDate && !fromDate) {
+            pbParams.filter = this.addFilterParam(pbParams.filter || "", `date <= "${toDate}"`);
         }
 
         if (categoryId) {

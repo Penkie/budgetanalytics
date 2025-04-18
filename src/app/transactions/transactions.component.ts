@@ -26,7 +26,9 @@ export class TransactionsComponent implements OnInit {
     public categoryId: string | null;
     public accountId: string | null;
     public amount: number | null;
-    public greaterOrLessThan: '>' | '<';
+    public greaterOrLessThan: string | null;
+    public fromDate: string | null;
+    public toDate: string | null;
 
     constructor(private pbService: PocketbaseService, private route: ActivatedRoute, private router: Router) {}
 
@@ -34,34 +36,45 @@ export class TransactionsComponent implements OnInit {
         this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
         this.accountId = this.route.snapshot.queryParamMap.get('accountId');
         this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
-        this.greaterOrLessThan = this.route.snapshot.queryParamMap.get('greaterOrLessThan') as '>' | '<'; // TODO: refactor
+        this.greaterOrLessThan = this.route.snapshot.queryParamMap.get('greaterOrLessThan');
+        this.fromDate = this.route.snapshot.queryParamMap.get('fromDate');
+        this.toDate = this.route.snapshot.queryParamMap.get('toDate');
         this.loadTransactions();
     }
 
     public updateQueryParams(): void {
+        // reset current page when filters change.
+        this.currentPage = 1;
+        this.isCompleted = false;
         this.router.navigate([], {
             relativeTo: this.route,
             queryParams: {
                 categoryId: this.categoryId,
                 accountId: this.accountId,
                 amount: this.amount,
-                greaterOrLessThan: this.greaterOrLessThan
+                greaterOrLessThan: this.greaterOrLessThan,
+                fromDate: this.fromDate,
+                toDate: this.toDate,
             },
             queryParamsHandling: 'merge'
-        })
+        });
+
+        this.loadTransactions();
     }
 
     public loadTransactions(next?: boolean): void {
-        this.transactions = [];
-        this.updateQueryParams();
-
         if (next) {
             this.currentPage += 1;
         }
 
-        this.pbService.getTransactions(undefined, undefined, this.currentPage, this.categoryId || undefined, this.accountId || undefined, undefined, undefined, this.perPage).subscribe({
+        this.pbService.getTransactions(this.fromDate || undefined, this.toDate || undefined, this.currentPage, this.categoryId || undefined, this.accountId || undefined, this.amount || undefined, this.greaterOrLessThan || undefined, this.perPage).subscribe({
             next: (transactions) => {
-                this.transactions = this.transactions.concat(transactions);
+                if (next) {
+                    this.transactions = this.transactions.concat(transactions);
+                } else {
+                    this.transactions = transactions;
+                }
+                
                 this.loading = false;
 
                 if (transactions.length < this.perPage) {

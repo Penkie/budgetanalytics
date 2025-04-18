@@ -17,7 +17,10 @@
         </div>
         <div class="filter">
             <span>Category</span>
-            <select name="category" id="category">
+            <select 
+                [value]="selectedCategory()"
+                (change)="onCategoryChange($event)"
+                name="category" id="category">
                 <option value=""></option>
                 @for (category of categories$ | async; track $index) {
                     <option [value]="category.id">{{ category.name }}</option>
@@ -27,16 +30,28 @@
         <div class="filter">
             <span>Amount</span>
             <div class="multiple-fields">
-                <select name="amount" id="amount">
+                <select 
+                    [value]="greaterOrLessThan()"
+                    (change)="onGreateOrLessThanChange($event)"
+                    name="amount" id="amount">
                     <option [selected]="greaterOrLessThan() == '>'" value=">">Greater than</option>
                     <option [selected]="greaterOrLessThan() == '<'" value="<">Smaller than</option>
                 </select>
-                <input [value]="amount()" placeholder="Amount" class="classic-input" type="text">
+                <input [value]="amount()" (change)="onAmountChange($event)" placeholder="Amount" class="classic-input" type="text">
             </div>
         </div>
         <div class="filter">
             <span>Date</span>
-            <input class="classic-input" type="date">
+            <div class="multiple-fields">
+                <div class="date-field">
+                    <span>From</span>
+                    <input [value]="fromDate()" (change)="onFromDateChange($event)" class="classic-input" type="date">
+                </div>
+                <div class="date-field">
+                    <span>To</span>
+                    <input [value]="toDate()" (change)="onToDateChange($event)" class="classic-input" type="date">
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -22,6 +22,7 @@
         display: flex;
         margin-top: 10px;
         gap: 10px;
+        flex-wrap: wrap;
     }
 
     .filter {
@@ -47,6 +48,12 @@
         .multiple-fields {
             display: flex;
             gap: 10px;
+
+            .date-field {
+                span {
+                    font-size: 14px;
+                }
+            }
         }
     }
 }

@@ -1,13 +1,17 @@
 <default-page title="All transactions" goBackPathUrl="/">
     <div top-section>
         <app-filter [(selectedCategory)]="categoryId"
-                    (selectedCategoryChange)="loadTransactions()"
+                    (selectedCategoryChange)="updateQueryParams()"
                     [(selectedAccount)]="accountId" 
-                    (selectedAccountChange)="loadTransactions()"
+                    (selectedAccountChange)="updateQueryParams()"
                     [(amount)]="amount"
-                    (amountChange)="loadTransactions()"
-                    [greaterOrLessThan]="greaterOrLessThan"
-                    (greaterOrLessThanChange)="loadTransactions()"
+                    (amountChange)="updateQueryParams()"
+                    [(greaterOrLessThan)]="greaterOrLessThan"
+                    (greaterOrLessThanChange)="updateQueryParams()"
+                    [(fromDate)]="fromDate"
+                    (fromDateChange)="updateQueryParams()"
+                    [(toDate)]="toDate"
+                    (toDateChange)="updateQueryParams()"
                 >
         </app-filter>
     </div>
