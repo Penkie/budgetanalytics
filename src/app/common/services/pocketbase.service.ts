@@ -10,12 +10,13 @@ import { Category } from '../models/category';
 import { Account } from '../models/account.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ProjectAccount } from '../models/project-account.model';
+import { Project } from '../models/project.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PocketbaseService {
-    // TODO: change to env variable
     private pb = new PocketBase(environment.apiUrl);
     private pbUrl = environment.apiUrl;
 
@@ -303,4 +304,27 @@ export class PocketbaseService {
 
         return currentFilter += filterToAdd;
     }
+
+    // projects
+
+    public getUserProjectAccount(): Observable<ProjectAccount[]> {
+        return from(this.pb.collection('project_account').getFullList<ProjectAccount>());
+    }
+
+    public createUserProjectAccount(accountId: string): Observable<ProjectAccount> {
+        const user = this.getUser();
+        if (user) {
+            return from(this.pb.collection('project_account').create<ProjectAccount>({ account: accountId, user: user['id'] }));
+        }
+
+        return of();
+    }
+
+    public getUserProjects(projectAccountId: string): Observable<Project[]> {
+        return from(this.pb.collection('projects').getList<Project>(1, 100, { filter: `project = ${projectAccountId}` }))
+            .pipe(
+                map((res) => res.items)
+            );
+    }
+
 }

@@ -1,0 +1,30 @@
+@if (!projectAccount && !loading) {
+    <div class="no-project-account">
+        <!-- User has no project account, he has to add a linked account -->
+         <span>Please choose a account to link your projects to</span>
+         <form (submit)="validate()">
+             <select
+                 name="select-account"
+                 class="classic-select"
+                 [(ngModel)]="selectedProjectId">
+                 <option value=""></option>
+                 @for (account of accounts(); track $index) {
+                     <option [value]="account.id">
+                         {{ account.name }}
+                     </option>
+                 }
+             </select>
+             <button [disabled]="!selectedProjectId" class="classic-btn">OK</button>
+            </form>
+    </div>
+}
+@else {
+    <!-- User has a project account, display projects -->
+     <div class="projects">
+        @for (project of projects; track $index) {
+            <div class="project">
+                {{ project.name }}
+            </div>
+        }
+     </div>
+}

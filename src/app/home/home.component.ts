@@ -16,6 +16,7 @@ import { DateRange } from '../common/models/date-range';
 import { ClickOutsideDirective } from '../common/directive/clickoutside.directive';
 import { AuthModel } from 'pocketbase';
 import { Account } from '../common/models/account.model';
+import { ProjectsComponent } from './widgets/projects/projects.component';
 
 @Component({
     selector: 'app-home',
@@ -28,7 +29,8 @@ import { Account } from '../common/models/account.model';
         IconButtonComponent,
         TransactionItemComponent,
         DateSelectionComponent,
-        ClickOutsideDirective
+        ClickOutsideDirective,
+        ProjectsComponent
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
