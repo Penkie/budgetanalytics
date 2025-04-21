@@ -163,7 +163,16 @@
     <div class="projects-box box">
         <div class="heading">
             <span class="title">Projects</span>
+            <div class="actions">
+                @if (projectAccount) {
+                    <icon-button
+                        iconName="add"
+                        pathToUrl="/project"
+                    ></icon-button>
+                }
+            </div>
         </div>
-        <app-projects [accounts]="accounts"></app-projects>
+        
+        <app-projects [accounts]="accounts" (projectAccountOutput)="projectAccount = $event"></app-projects>
     </div>
 </div>

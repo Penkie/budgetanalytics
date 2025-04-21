@@ -17,6 +17,7 @@ import { ClickOutsideDirective } from '../common/directive/clickoutside.directiv
 import { AuthModel } from 'pocketbase';
 import { Account } from '../common/models/account.model';
 import { ProjectsComponent } from './widgets/projects/projects.component';
+import { ProjectAccount } from '../common/models/project-account.model';
 
 @Component({
     selector: 'app-home',
@@ -56,6 +57,8 @@ export class HomeComponent implements OnInit {
     public user: AuthModel = this.pbService.getUser();
     public userCurrency = this.pbService.getUserCurrency();
     public currentAvatarUrl: string = this.pbService.getFiles(this.pbService.getUser(), this.pbService.getUser()?.['avatar']);
+
+    public projectAccount: ProjectAccount;
 
     constructor(private pbService: PocketbaseService, private router: Router) {}
 

@@ -20,6 +20,12 @@
 }
 @else {
     <!-- User has a project account, display projects -->
+    <div class="available-amount">
+        <span>Available amount</span>
+        <span>
+            <b>{{ calculateAvailableAmount() }} {{ userCurrency }}</b>
+        </span>
+    </div>
      <div class="projects">
         @for (project of projects; track $index) {
             <div class="project">
