@@ -21,7 +21,6 @@ import { ProjectAccount } from '../common/models/project-account.model';
 
 @Component({
     selector: 'app-home',
-    standalone: true,
     imports: [
         CommonModule,
         NgxEchartsDirective,
@@ -35,7 +34,7 @@ import { ProjectAccount } from '../common/models/project-account.model';
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
-    providers: [provideEcharts()],
+    providers: [provideEcharts()]
 })
 export class HomeComponent implements OnInit {
     public transactions: Transaction[] = [];

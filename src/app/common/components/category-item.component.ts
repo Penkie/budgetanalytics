@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'category-item',
-    standalone: true,
     imports: [CommonModule],
     template: `
         <div
@@ -45,7 +44,7 @@ import { Component, Input } from '@angular/core';
                 }
             }
         }
-    `,
+    `
 })
 export class CategoryItemComponent {
     @Input() name: string;

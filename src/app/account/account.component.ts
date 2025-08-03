@@ -8,15 +8,14 @@ import { NotificationService } from '../common/services/notification.service';
 import { NotificationType } from '../common/models/notification';
 
 @Component({
-  selector: 'app-account',
-  standalone: true,
-  imports: [
-    DefaultPageComponent,
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './account.component.html',
-  styleUrl: './account.component.scss'
+    selector: 'app-account',
+    imports: [
+        DefaultPageComponent,
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './account.component.html',
+    styleUrl: './account.component.scss'
 })
 export class AccountComponent implements OnInit {
 

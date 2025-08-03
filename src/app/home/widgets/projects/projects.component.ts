@@ -8,14 +8,13 @@ import { filter, switchMap, tap } from 'rxjs';
 import { Project } from '../../../common/models/project.model';
 
 @Component({
-  selector: 'app-projects',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './projects.component.html',
-  styleUrl: './projects.component.scss'
+    selector: 'app-projects',
+    imports: [
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './projects.component.html',
+    styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent implements OnInit {
 
