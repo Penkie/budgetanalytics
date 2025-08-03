@@ -6,16 +6,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { NotificationService } from '../common/services/notification.service';
 import { NotificationType } from '../common/models/notification';
 import { Router } from '@angular/router';
-import { ModalService } from 'ngx-modal-ease';
 import { ConfirmDeleteComponent } from './modals/confirm-delete/confirm-delete.component';
 import { filter, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [DefaultPageComponent, ReactiveFormsModule],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+    selector: 'app-settings',
+    imports: [DefaultPageComponent, ReactiveFormsModule],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent implements OnInit {
 
@@ -39,8 +37,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private pb: PocketbaseService,
     private notificationService: NotificationService,
-    private router: Router,
-    private modal: ModalService
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -120,32 +117,32 @@ export class SettingsComponent implements OnInit {
   }
 
   public deleteAccount(): void {
-    this.modal.open(ConfirmDeleteComponent, {
-      modal: {
-        enter: 'scale-rotate 0.5s ease-out',
-      },
-      size: {
-        width: '400px'
-      },
-      overlay: {
-        leave: 'fade-out 0.3s',
-      },
-    })
-    .pipe(
-      filter((value) => value),
-      switchMap(() => {
-        return this.pb.deleteUserAccount(this.user!['id']);
-      })
-    ).subscribe({
-      next: () => {
-        this.pb.logoutUser();
-        this.router.navigate(['auth']);
-        this.notificationService.addNotification('Account deleted successfully', 5000, NotificationType.SUCCESS);
-      },
-      error: () => {
-        this.notificationService.addNotification('Something went wrong while delete your account', 5000, NotificationType.ERROR);
-      }
-    });
+    // this.modal.open(ConfirmDeleteComponent, {
+    //   modal: {
+    //     enter: 'scale-rotate 0.5s ease-out',
+    //   },
+    //   size: {
+    //     width: '400px'
+    //   },
+    //   overlay: {
+    //     leave: 'fade-out 0.3s',
+    //   },
+    // })
+    // .pipe(
+    //   filter((value) => value),
+    //   switchMap(() => {
+    //     return this.pb.deleteUserAccount(this.user!['id']);
+    //   })
+    // ).subscribe({
+    //   next: () => {
+    //     this.pb.logoutUser();
+    //     this.router.navigate(['auth']);
+    //     this.notificationService.addNotification('Account deleted successfully', 5000, NotificationType.SUCCESS);
+    //   },
+    //   error: () => {
+    //     this.notificationService.addNotification('Something went wrong while delete your account', 5000, NotificationType.ERROR);
+    //   }
+    // });
 
   }
 }

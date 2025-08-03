@@ -6,10 +6,9 @@ import { AlertComponent } from '../common/components/alert.component';
 
 @Component({
     selector: 'app-auth',
-    standalone: true,
     imports: [ReactiveFormsModule, AlertComponent],
     templateUrl: './auth.component.html',
-    styleUrl: './auth.component.scss',
+    styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
     public authMode: 'signin' | 'signup' = 'signin';

@@ -9,10 +9,9 @@ import { FilterComponent } from "./components/filter/filter.component";
 
 @Component({
     selector: 'app-transactions',
-    standalone: true,
     imports: [DefaultPageComponent, TransactionItemComponent, FilterComponent],
     templateUrl: './transactions.component.html',
-    styleUrl: './transactions.component.scss',
+    styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent implements OnInit {
     public transactions: Transaction[] = [];

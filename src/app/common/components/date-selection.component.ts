@@ -18,7 +18,6 @@ import { ClickOutsideDirective } from '../directive/clickoutside.directive';
 
 @Component({
     selector: 'date-selection',
-    standalone: true,
     imports: [CommonModule, ClickOutsideDirective],
     template: `
         <div class="menu-container">
@@ -175,7 +174,7 @@ import { ClickOutsideDirective } from '../directive/clickoutside.directive';
                 }
             }
         }
-    `,
+    `
 })
 export class DateSelectionComponent {
     @Input() type: RangeType = RangeType.month;

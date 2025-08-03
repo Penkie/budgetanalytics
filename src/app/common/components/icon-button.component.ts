@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'icon-button',
-    standalone: true,
     imports: [CommonModule, RouterModule],
     template: `
         <button routerLink="{{ pathToUrl }}" class="btn">
@@ -31,7 +30,7 @@ import { RouterModule } from '@angular/router';
                 }
             }
         }
-    `,
+    `
 })
 export class IconButtonComponent {
     @Input() iconName: string;

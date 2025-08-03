@@ -5,7 +5,6 @@ import { IconButtonComponent } from './icon-button.component';
 
 @Component({
     selector: 'default-page',
-    standalone: true,
     imports: [CommonModule, RouterModule, IconButtonComponent],
     template: `
         <div class="head-container">
@@ -85,7 +84,7 @@ import { IconButtonComponent } from './icon-button.component';
                 padding: 20px;
             }
         }
-    `,
+    `
 })
 export class DefaultPageComponent {
     @Input() title: string;

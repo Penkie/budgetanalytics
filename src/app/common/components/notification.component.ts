@@ -4,7 +4,6 @@ import { AppNotification } from '../models/notification';
 
 @Component({
     selector: 'notification',
-    standalone: true,
     imports: [CommonModule],
     template: `
         <div [ngClass]="{
@@ -48,7 +47,7 @@ import { AppNotification } from '../models/notification';
 
             }
         }
-    `,
+    `
 })
 export class NotificationComponent implements AfterViewInit, OnDestroy {
 

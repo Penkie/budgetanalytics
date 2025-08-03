@@ -3,7 +3,6 @@ import { Component, Input } from "@angular/core";
 
 @Component({
     selector: 'alert',
-    standalone: true,
     imports: [CommonModule],
     template: `
         <div [ngClass]="type" class="alert">

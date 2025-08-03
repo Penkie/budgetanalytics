@@ -5,7 +5,6 @@ import { Transaction } from '../models/transaction.model';
 
 @Component({
     selector: 'transaction-item',
-    standalone: true,
     imports: [CommonModule, RouterModule],
     template: `
         <div routerLink="/transaction/{{ transaction.id }}" class="transaction">
@@ -153,7 +152,7 @@ import { Transaction } from '../models/transaction.model';
                 width: fit-content;
             }
         }
-    `,
+    `
 })
 export class TransactionItemComponent {
     @Input() transaction: Transaction;

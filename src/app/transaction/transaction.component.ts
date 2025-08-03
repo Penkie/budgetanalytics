@@ -20,16 +20,14 @@ import { NotificationType } from '../common/models/notification';
 
 @Component({
     selector: 'app-transaction',
-    standalone: true,
     imports: [
         RouterModule,
-        CategoryItemComponent,
         ReactiveFormsModule,
         CommonModule,
         DefaultPageComponent,
     ],
     templateUrl: './transaction.component.html',
-    styleUrl: './transaction.component.scss',
+    styleUrl: './transaction.component.scss'
 })
 export class TransactionComponent implements OnInit {
     // what when how much
